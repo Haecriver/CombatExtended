@@ -112,7 +112,20 @@ public class Verb_ShootMortarCE : Verb_ShootCE
             return null;
         }
         ShiftVecReport report = base.ShiftVecReportFor(target);
-        report.circularMissRadius = GetGlobalMissRadiusForDist(report.shotDist);
+
+        float shotDist = report.shotDist;
+
+        // Shelling across layers
+        if (globalSourceInfo.Tile.Layer != globalTargetInfo.Tile.Layer) 
+        {
+            CompOrbitalTurret compOrbitalTurret = caster.TryGetComp<CompOrbitalTurret>();
+            if (compOrbitalTurret != null && compOrbitalTurret.Props.interLayerPrecisionBonusFactor != 0)
+            {
+                shotDist = shotDist / compOrbitalTurret.Props.interLayerPrecisionBonusFactor;
+            }
+        }
+
+        report.circularMissRadius = GetGlobalMissRadiusForDist(shotDist);
         report.weatherShift = (1f - globalTargetInfo.Map.weatherManager.CurWeatherAccuracyMultiplier) * 1.5f + (1 - globalSourceInfo.Map.weatherManager.CurWeatherAccuracyMultiplier) * 0.5f;
 
         ArtilleryMarker marker = null;

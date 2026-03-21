@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
 using Verse;
-using CombatExtended.WorldObjects;
 
 namespace CombatExtended;
 public static class ShellingUtility
@@ -31,10 +29,6 @@ public static class ShellingUtility
             return distanceCache.distance;
         }
 
-        if (startingTile.layerId != destinationTile.layerId)
-        {
-            // startingTile = destinationTile.Layer.GetClosestTile_NewTemp(startingTile);
-        }
         distanceCache.startingTile = startingTile;
         distanceCache.destinationTile = destinationTile;
 
