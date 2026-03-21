@@ -17,6 +17,7 @@ public class CompAmmoUser : CompRangedGizmoGiver
     #region Fields
 
     private int curMagCountInt = 0;
+    [Compatibility.Multiplayer.SyncFieldAttribute]
     private int tryReloadOn = 0;
     protected AmmoDef currentAmmoInt = null;
     protected AmmoDef selectedAmmo;
@@ -83,7 +84,14 @@ public class CompAmmoUser : CompRangedGizmoGiver
     public int TryReloadOn
     {
         get => tryReloadOn;
-        set => tryReloadOn = value;
+        set
+        {
+            if (tryReloadOn != value)
+            {
+                tryReloadOn = value;
+                Compatibility.Multiplayer.syncField(this, nameof(tryReloadOn), value);
+            }
+        }
     }
     public float SafeDistanceToReload => Controller.settings.OpportunisticReloadSafeDistance;
 
