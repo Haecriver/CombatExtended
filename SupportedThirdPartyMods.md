@@ -124,6 +124,7 @@ Arrow Please (Continued)    |
 Asimov  |
 Aspero Race |
 Astoriel Legacy |
+Astrofuel gear  |
 Astra Militarum Regimentum - Cadia  |
 Astra Militarum Regimentum - Krieg  |
 Astra Militarum Regimentum - Krieg: Officer Helmet  |
@@ -135,6 +136,7 @@ Beeralope Squad	|
 Beliar Xenotype |
 Beta Anime Hair	|
 Beta Girls und Panzer Hair and Apparel	|
+Better Traders Guild    |
 Better Wool Production - C# Edition	|
 Big and Small - Genes & More	|
 Big and Small - Heaven and Hell
@@ -230,6 +232,7 @@ Erin's Fox Squirrel |
 Erin's Lizard Doggo |
 Erin's Miqo'te  |
 Erin's Mountain Animals |
+Erin's Rhy'aeth |
 Erin's Sephyr   |
 Erin's Shisune   |
 Erin's Valheim Creatures   |
@@ -457,6 +460,7 @@ Persona Warcasket Weapons   |
 Plasma Weapons Pack   |
 Polarisbloc - Security Force	|
 Poleepkwa Race	|
+Ponpeco Kids' Clothes   |
 Possessed Weapons	|
 pphhyy's Demigryphs   |
 phynilla Expanded Mechs Scyther |
@@ -634,6 +638,7 @@ Vanilla Factions Expanded - Settlers	|
 Vanilla Factions Expanded - Tribals |
 Vanilla Furniture Expanded - Production	|
 Vanilla Furniture Expanded -  Security |
+Vanilla Furniture Expanded -  Factory |
 Vanilla Genetics Expanded   |
 Vanilla Ideology Expanded - Dryads  |
 Vanilla Ideology Expanded - Hats and Rags |
@@ -655,6 +660,7 @@ Vanilla Races Expanded - Hussar  |
 Vanilla Races Expanded - Insector  |
 Vanilla Races Expanded - Lycanthrope  |
 Vanilla Races Expanded - Phytokin  |
+Vanilla Races Expanded - Pigskin  |
 Vanilla Races Expanded - Sanguophage  |
 Vanilla Races Expanded - Saurid  |
 Vanilla Skills Expanded  |

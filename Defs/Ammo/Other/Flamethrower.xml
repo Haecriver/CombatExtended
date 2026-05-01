@@ -58,6 +58,7 @@
 				<preExplosionSpawnChance>1</preExplosionSpawnChance>
 			</li>
 		</comps>
+		<detonateProjectile>Bullet_Flamethrower_Napalm</detonateProjectile>
 	</ThingDef>
 
 	<ThingDef Class="CombatExtended.AmmoDef" ParentName="FlamethrowerBase">
@@ -78,6 +79,7 @@
 				<preExplosionSpawnChance>1</preExplosionSpawnChance>
 			</li>
 		</comps>
+		<detonateProjectile>Bullet_Flamethrower_Prometheum</detonateProjectile>
 	</ThingDef>
 
 	<ThingDef Class="CombatExtended.AmmoDef" ParentName="FlamethrowerBase" MayRequire="Ludeon.Rimworld.Anomaly">
@@ -99,6 +101,7 @@
 				<preExplosionSpawnChance>1</preExplosionSpawnChance>
 			</li>
 		</comps>
+		<detonateProjectile>Bullet_Flamethrower_Bioferrite</detonateProjectile>
 	</ThingDef>
 
 	<!-- ================== Projectiles ================== -->

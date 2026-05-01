@@ -68,6 +68,7 @@
 		<li IfModActive="Mlie.ArchotechPlus">ModPatches/Archotech+</li>
 		<li IfModActive="Mlie.ArgoniansofBlackmarsh">ModPatches/Argonians of Blackmarsh</li>
 		<li IfModActive="Neronix17.Asimov">ModPatches/Asimov</li>
+		<li IfModActive="lts.AG">ModPatches/Astrofuel gear</li>
 		<li IfModActive="Mlie.ArrowPlease">ModPatches/Arrow Please</li>
 		<li IfModActive="Greiger.AsperoRace">ModPatches/Aspero Race</li>
 		<li IfModActive="Roskii.Astoriel">ModPatches/Astoriel Legacy</li>
@@ -84,6 +85,7 @@
 		<li IfModActive="ElSov.Beliar">ModPatches/Beliar Xenotype</li>
 		<li IfModActive="Starppole.Beta.AnimeHair1.6">ModPatches/Beta Anime Hair</li>
 		<li IfModActive="Beta.GuPHAA">ModPatches/Beta GnP Hair and Apparel</li>		
+		<li IfModActive="shunter.bettertradersguild">ModPatches/Better Traders Guild</li>
 		<li IfModActive="divineDerivative.AutoWool">ModPatches/Better Wool Production</li>
 		<li IfModActive="RedMattis.Heaven">ModPatches/Big and Small - Heaven and Hell</li>
 		<li IfModActive="RedMattis.BigSmall.MedievalOverhaulFactions">ModPatches/Big and Small - MO</li>
@@ -187,6 +189,7 @@
 		<li IfModActive="Erin.LizzardDoggo">ModPatches/Erin's Lizard Doggo</li>
 		<li IfModActive="Erin.Miqote">ModPatches/Erin's Miqo'te</li>
 		<li IfModActive="Erin.Mountain">ModPatches/Erin's Mountain Animals</li>
+		<li IfModActive="Erin.Rhyaeth">ModPatches/Erin's Rhy'aeth</li>
 		<li IfModActive="Erin.Sephyr">ModPatches/Erin's Sephyr</li>
 		<li IfModActive="Erin.Shisune">ModPatches/Erin's Shisune</li>
 		<li IfModActive="Erin.Valheim.Creatures">ModPatches/Erin's Valheim Creatures</li>
@@ -227,7 +230,7 @@
 		<li IfModActive="Mlie.FrontlineTrenches">ModPatches/Frontline - Trenches</li>
 		<li IfModActive="TheKingInYellow.Lope">ModPatches/Fuck it Unboomas your Lope</li>
 		<li IfModActive="com.distman.gastrap">ModPatches/Gas Traps and Shells</li>
-		<li IfModActive="hlx.GestaltEngine">ModPatches/Gestalt Engine</li>
+		<li IfModActive="Mlie.GestaltEngine,hlx.GestaltEngine">ModPatches/Gestalt Engine</li>
 		<li IfModActive="Owlchemist.GiddyUp,MemeGoddess.GiddyUp">ModPatches/Giddy-Up 2</li>
 		<li IfModActive="Kilo.CapVacHelm">ModPatches/Gravship Captain Set</li>
 		<li IfModActive="tyrannidae.gregnfriends">ModPatches/GREG</li>
@@ -448,6 +451,7 @@
 		<li IfModActive="Vanya.Polarisbloc.CoreLab,Vanya.Polarisbloc.CoreLab.tmp">ModPatches/Polarisbloc Core Lab</li>
 		<li IfModActive="Vanya.Polarisbloc.SecurityForce,Vanya.Polarisbloc.SecurityForce.tmp">ModPatches/Polarisbloc Security Force</li>
 		<li IfModActive="milk.poleepkwaupdate, GHOST.Poleepkwa">ModPatches/Poleepkwa Race</li>
+		<li IfModActive="ponpeco.KidsClothes">ModPatches/Ponpeco Kids Clothes</li>
 		<li IfModActive="BotchJob.PossessedWeapons">ModPatches/Possessed Weapons</li>
 		<li IfModActive="JangoDsoul.T45b.PowerArmor">ModPatches/PowerArmour T-45b</li>
 		<li IfModActive="pphhyy.DemigryphsMod">ModPatches/pphhyy Demigryph</li>
@@ -668,6 +672,7 @@
 		<li IfModActive="OskarPotocki.VanillaFactionsExpanded.SettlersModule">ModPatches/Vanilla Factions Expanded - Settlers</li>
 		<li IfModActive="OskarPotocki.VFE.Tribals">ModPatches/Vanilla Factions Expanded - Tribals</li>
 		<li IfModActive="VanillaExpanded.VFESecurity">ModPatches/Vanilla Furniture Expanded - Security</li>
+		<li IfModActive="VanillaExpanded.VFEFactory">ModPatches/Vanilla Furniture Expanded - Factory</li>
 		<li IfModActive="VanillaExpanded.VGeneticsE">ModPatches/Vanilla Genetics Expanded</li>
 		<li IfModActive="vanillaexpanded.gravship">ModPatches/Vanilla Gravship Expanded - Chapter 1</li>
 		<li IfModActive="VanillaExpanded.Ideo.Dryads">ModPatches/Vanilla Ideology Expanded - Dryads</li>
@@ -690,6 +695,7 @@
 		<li IfModActive="vanillaracesexpanded.insector">ModPatches/Vanilla Races Expanded - Insector</li>
 		<li IfModActive="vanillaracesexpanded.lycanthrope">ModPatches/Vanilla Races Expanded - Lycanthrope</li>
 		<li IfModActive="vanillaracesexpanded.phytokin">ModPatches/Vanilla Races Expanded - Phytokin</li>
+		<li IfModActive="vanillaracesexpanded.pigskin">ModPatches/Vanilla Races Expanded - Pigskin</li>
 		<li IfModActive="vanillaracesexpanded.sanguophage">ModPatches/Vanilla Races Expanded - Sanguophage</li>
 		<li IfModActive="vanillaracesexpanded.saurid">ModPatches/Vanilla Races Expanded - Saurid</li>
 		<li IfModActive="vanillaracesexpanded.waster">ModPatches/Vanilla Races Expanded - Waster</li>

@@ -623,8 +623,8 @@
 			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
 			<hasStandardCommand>True</hasStandardCommand>
 			<defaultProjectile>Bullet_3030Winchester_FMJ</defaultProjectile>
-			<warmupTime>48</warmupTime>
-			<range>31</range>
+			<warmupTime>0.9</warmupTime>
+			<range>48</range>
 			<soundCast>VWE_Shot_LeverActionRifle</soundCast>
 			<soundCastTail>GunTail_Heavy</soundCastTail>
 			<muzzleFlashScale>9</muzzleFlashScale>
@@ -783,6 +783,13 @@
 	</Operation>
 
 	<!-- === Flamethrower (RM2 Flamethrower from CE: Guns) === -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="VWE_Gun_Flamethrower"]/verbs/li/verbClass</xpath>
+		<value>
+			<verbClass>Verb_Shoot</verbClass>
+		</value>
+	</Operation>
+
 	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
 		<defName>VWE_Gun_Flamethrower</defName>
 		<statBases>

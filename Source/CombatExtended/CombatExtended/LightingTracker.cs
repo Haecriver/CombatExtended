@@ -17,7 +17,9 @@ public class LightingTracker : MapComponent
     private static readonly IntVec3[] AdjCells;
     private static readonly float[] AdjWeights;
     private readonly float[] glowGridCache;
-    private int lastTick = 0;
+    private readonly float[] coverGridCache;
+    private int lastCoverTick = 0;
+    private int lastGlowTick = 0;
 
     static LightingTracker()
     {
@@ -140,7 +142,9 @@ public class LightingTracker : MapComponent
         _cellIndices = map.cellIndices;
 
         muzzle_grid = new MuzzleRecord[NumGridCells];
-        glowGridCache = new float[map.Size.x * map.Size.y];
+        glowGridCache = new float[NumGridCells];
+
+        coverGridCache = new float[NumGridCells];
     }
 
     public override void ExposeData()
@@ -244,19 +248,45 @@ public class LightingTracker : MapComponent
         return Mathf.Min(result, IsNight ? 0.5f : 1.0f);
     }
 
+    public float HighestCoverAt(IntVec3 position)
+    {
+        int thisTick = Find.TickManager.TicksAbs;
+        if (thisTick != lastCoverTick)
+        {
+            Array.Fill(coverGridCache, -1f);
+            lastCoverTick = thisTick;
+        }
+        float coverHeight = coverGridCache[CellToIndex(position)];
+        if (coverHeight == -1)
+        {
+            Thing cover = position.GetFirstPawn(map) ?? position.GetCover(map);
+            if (cover == null)
+            {
+                coverHeight = 0;
+            }
+            else
+            {
+                Bounds bounds = CE_Utility.GetBoundsFor(cover);
+                coverHeight = bounds.size.y;
+            }
+            coverGridCache[CellToIndex(position)] = coverHeight;
+        }
+        return coverHeight;
+    }
+
     private float GameGlowAt(IntVec3 source)
     {
         int thisTick = Find.TickManager.TicksAbs;
 
-        if (thisTick != lastTick)
+        if (thisTick != lastGlowTick)
         {
             Array.Fill(glowGridCache, -1f);
-            lastTick = thisTick;
+            lastGlowTick = thisTick;
         }
-        float glow = glowGridCache[source.x * map.Size.y + source.y];
+        float glow = glowGridCache[CellToIndex(source)];
         if (glow == -1)
         {
-            glowGridCache[source.x * map.Size.y + source.y] = glow = map.glowGrid.GroundGlowAt(source);
+            glowGridCache[CellToIndex(source)] = glow = map.glowGrid.GroundGlowAt(source);
         }
         return glow;
     }

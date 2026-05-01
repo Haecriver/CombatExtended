@@ -23,9 +23,10 @@ public class Settings : ModSettings, ISettingsCE
     private bool turretsBreakShields = true;
     private bool showBackpacks = true;
     private bool showTacticalVests = true;
-    private bool genericammo = false;
+    private bool genericAmmo = false;
     private bool partialstats = true;
     private bool enableExtraEffects = true;
+    private bool realWeaponNames = true;
 
     private bool enableArcOfFire = false;
 
@@ -60,7 +61,7 @@ public class Settings : ModSettings, ISettingsCE
 
     public bool BipodMechanics => bipodMechanics;
 
-    public bool GenericAmmo => genericammo;
+    public bool GenericAmmo => genericAmmo;
     public bool AutoSetUp => autosetup;
     public bool ShowTaunts => showTaunts;
     public bool AllowMeleeHunting => allowMeleeHunting;
@@ -74,6 +75,7 @@ public class Settings : ModSettings, ISettingsCE
 
     public bool PartialStat => partialstats;
     public bool EnableExtraEffects => enableExtraEffects;
+    public bool RealWeaponNames => realWeaponNames;
     public bool ShowExtraTooltips => showExtraTooltips;
     public bool DetailedMeleeTooltip => detailedMeleeTooltip;
 
@@ -213,6 +215,7 @@ public class Settings : ModSettings, ISettingsCE
         Scribe_Values.Look(ref showExtraStats, "showExtraStats", false);
         Scribe_Values.Look(ref variedHumanHeight, "variedHumanHeight", false);
         Scribe_Values.Look(ref logUnpatchedDefs, "logUnpatchedDefs", false);
+        Scribe_Values.Look(ref realWeaponNames, "realWeaponNames", true);
 
 #if DEBUG
         // Debug settings
@@ -251,7 +254,7 @@ public class Settings : ModSettings, ISettingsCE
         Scribe_Values.Look(ref forbiddenNeolithicProjectiles, "forbiddenNeolithicProjectiles", true);
         Scribe_Values.Look(ref realisticCookOff, "realisticCookOff", true);
         Scribe_Values.Look(ref stuckArrowsAsFlecks, "stuckArrowsAsFlecks", true);
-        Scribe_Values.Look(ref genericammo, "genericAmmo", false);
+        Scribe_Values.Look(ref genericAmmo, "genericAmmo", false);
 
         Scribe_Values.Look(ref ShowTutorialPopup, "ShowTutorialPopup", true);
 
@@ -385,7 +388,7 @@ public class Settings : ModSettings, ISettingsCE
                 list.CheckboxLabeled("CE_Settings_ForbiddenNeolithicProjectiles_Title".Translate(), ref forbiddenNeolithicProjectiles, "CE_Settings_ForbiddenNeolithicProjectiles_Desc".Translate());
             }
             list.CheckboxLabeled("CE_Settings_RealisticCookOff_Title".Translate(), ref realisticCookOff, "CE_Settings_RealisticCookOff_Desc".Translate());
-            list.CheckboxLabeled("CE_Settings_GenericAmmo".Translate(), ref genericammo, "CE_Settings_GenericAmmo_Desc".Translate());
+            list.CheckboxLabeled("CE_Settings_GenericAmmo".Translate(), ref genericAmmo, "CE_Settings_GenericAmmo_Desc".Translate());
         }
         else
         {
@@ -427,6 +430,7 @@ public class Settings : ModSettings, ISettingsCE
         list.CheckboxLabeled("CE_Settings_DetailedMeleeTooltip_Title".Translate(), ref detailedMeleeTooltip, "CE_Settings_DetailedMeleeTooltip_Desc".Translate());
         list.CheckboxLabeled("CE_Settings_VariedHumanHeight_Title".Translate(), ref variedHumanHeight, "CE_Settings_VariedHumanHeight_Desc".Translate());
         list.CheckboxLabeled("CE_Settings_LogUnpatchedDefs_Title".Translate(), ref logUnpatchedDefs, "CE_Settings_LogUnpatchedDefs_Desc".Translate());
+        list.CheckboxLabeled("CE_Settings_RealWeaponNames_Title".Translate(), ref realWeaponNames, "CE_Settings_RealWeaponNames_Desc".Translate());
         list.Gap();
         list.GapLine();
         list.Gap();
@@ -557,7 +561,7 @@ public class Settings : ModSettings, ISettingsCE
         reuseNeolithicProjectiles = true;
         forbiddenNeolithicProjectiles = true;
         realisticCookOff = true;
-        genericammo = false;
+        genericAmmo = false;
         LastAmmoSystemStatusChanged();
 
     }
@@ -586,6 +590,7 @@ public class Settings : ModSettings, ISettingsCE
         enablePawnKindAutopatcher = true;
         variedHumanHeight = false;
         logUnpatchedDefs = false;
+        realWeaponNames = true;
 
 #if DEBUG
         debuggingMode = false;

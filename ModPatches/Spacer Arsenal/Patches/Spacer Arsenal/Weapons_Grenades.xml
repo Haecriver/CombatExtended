@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Patch>
-
 	<!-- Thumper Grenades -->
 
 	<!-- Projectile -->
@@ -126,7 +125,7 @@
 			</graphicData>
 		</value>
 	</Operation>
-	
+
 	<!-- Plasma Grenades -->
 
 	<!-- Projectile -->
@@ -251,7 +250,7 @@
 			</graphicData>
 		</value>
 	</Operation>
-	
+
 	<!-- Contact Grenades -->
 
 	<!-- Projectile -->
@@ -396,5 +395,23 @@
 			</graphicData>
 		</value>
 	</Operation>
-	
+
+	<Operation Class="PatchOperationAttributeSet">
+		<xpath>Defs/ThingDef[
+			defName="DV_Weapon_GrenadeThump" or
+			defName="DV_Weapon_GrenadePlasma" or
+			defName="DV_Weapon_GrenadeContact"
+			]</xpath>
+		<attribute>ParentName</attribute>
+		<value>BaseWeapon</value>
+	</Operation>
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[
+			defName="DV_Weapon_GrenadeThump" or
+			defName="DV_Weapon_GrenadePlasma" or
+			defName="DV_Weapon_GrenadeContact"
+			]/recipeMaker</xpath>
+	</Operation>
+
 </Patch>

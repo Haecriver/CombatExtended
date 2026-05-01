@@ -115,7 +115,9 @@ public class Building_AutoloaderCE : Building
         mannableComp = GetComp<CompMannable>();
 
         graphicsExt = def.GetModExtension<ModExtension_AutoLoaderGraphics>();
-        CacheGraphics();
+
+        LongEventHandler.ExecuteWhenFinished(CacheGraphics);
+
         if (CompAmmoUser == null)
         {
             Log.Error(this.GetCustomLabelNoCount() + " Requires CompAmmoUser to function properly.");

@@ -13,7 +13,6 @@
 					</capacities>
 					<power>7</power>
 					<cooldownTime>1.35</cooldownTime>
-					<chanceFactor>0.15</chanceFactor>
 					<armorPenetrationBlunt>3</armorPenetrationBlunt>
 					<linkedBodyPartsGroup>Shaft</linkedBodyPartsGroup>
 				</li>
@@ -22,11 +21,10 @@
 					<capacities>
 						<li>Cut</li>
 					</capacities>
-					<power>45</power>
-					<cooldownTime>2.2</cooldownTime>
-					<chanceFactor>1.165</chanceFactor>
-					<armorPenetrationBlunt>25.4</armorPenetrationBlunt>
-					<armorPenetrationSharp>16</armorPenetrationSharp>
+					<power>32</power>
+					<cooldownTime>2.64</cooldownTime>
+					<armorPenetrationBlunt>5.41</armorPenetrationBlunt>
+					<armorPenetrationSharp>2.12</armorPenetrationSharp>
 					<linkedBodyPartsGroup>Edge</linkedBodyPartsGroup>
 				</li>
 			</tools>
@@ -37,7 +35,7 @@
 		<xpath>Defs/ThingDef[defName="ERN_Auraeyl_Axe"]/statBases</xpath>
 		<value>
 			<Bulk>5</Bulk>
-			<MeleeCounterParryBonus>1.08</MeleeCounterParryBonus>
+			<MeleeCounterParryBonus>0.32</MeleeCounterParryBonus>
 		</value>
 	</Operation>
 
@@ -45,9 +43,9 @@
 		<xpath>Defs/ThingDef[defName="ERN_Auraeyl_Axe"]</xpath>
 		<value>
 			<equippedStatOffsets>
-				<MeleeCritChance>0.33</MeleeCritChance>
-				<MeleeParryChance>1.2</MeleeParryChance>
-				<MeleeDodgeChance>0.6</MeleeDodgeChance>
+				<MeleeCritChance>0.2</MeleeCritChance>
+				<MeleeParryChance>0.2</MeleeParryChance>
+				<MeleeDodgeChance>0.15</MeleeDodgeChance>
 			</equippedStatOffsets>
 		</value>
 	</Operation>
@@ -147,6 +145,7 @@
 			<SwayFactor>1.79</SwayFactor>
 			<Bulk>12.03</Bulk>
 			<RangedWeapon_Cooldown>1.2</RangedWeapon_Cooldown>
+			<MarketValue>270</MarketValue>
 		</statBases>
 		<costList>
 			<Steel>75</Steel>
