@@ -41,12 +41,12 @@ public class TravelingShell : TravelingThing
     {
         get => (shellDef.projectile as ProjectilePropertiesCE).shellingProps.tilesPerTick;
     }
-    
+
     public override bool ExpandingIconFlipHorizontal
     {
         get => GenWorldUI.WorldToUIPosition(Start).x > GenWorldUI.WorldToUIPosition(End).x;
     }
-    
+
     public bool IsInstant => (shellDef.projectile as ProjectilePropertiesCE).isInstant;
 
     public override float ExpandingIconRotation

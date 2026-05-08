@@ -116,7 +116,7 @@ public class Verb_ShootMortarCE : Verb_ShootCE
         float shotDist = report.shotDist;
 
         // Shelling across layers
-        if (globalSourceInfo.Tile.Layer != globalTargetInfo.Tile.Layer) 
+        if (globalSourceInfo.Tile.Layer != globalTargetInfo.Tile.Layer)
         {
             CompOrbitalTurret compOrbitalTurret = caster.TryGetComp<CompOrbitalTurret>();
             if (compOrbitalTurret != null && compOrbitalTurret.Props.interLayerPrecisionBonusFactor != 0)
