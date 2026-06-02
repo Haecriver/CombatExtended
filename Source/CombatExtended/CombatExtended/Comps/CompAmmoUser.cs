@@ -57,6 +57,36 @@ public class CompAmmoUser : CompRangedGizmoGiver
             return 0;
         }
     }
+
+    public int MagsLeftReadOnly
+    {
+        get
+        {
+            if (CompInventory != null)
+            {
+                int count = 0;
+                foreach (AmmoLink link in CurAmmoSet.ammoTypes)
+                {
+                    count += CompInventory.AmmoCountOfDef(link.ammo);
+                }
+                return count;
+            }
+            return 0;
+        }
+    }
+
+    public int MagsLeftSameTypeReadOnly
+    {
+        get
+        {
+            if (CompInventory != null)
+            {
+                return CompInventory.AmmoCountOfDef(CurrentAmmo);
+            }
+            return 0;
+        }
+    }
+
     public int MagSize
     {
         get

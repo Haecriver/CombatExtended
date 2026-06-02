@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,7 +39,7 @@ public class Building_TurretGunCE : Building_Turret
     public CompCanBeDormant dormantComp;
     public CompInitiatable initiatableComp;
     public CompMannable mannableComp;
-
+    public CompHackable hackableComp;
     public static Material ForcedTargetLineMat = MaterialPool.MatFrom(GenDraw.LineTexPath, ShaderDatabase.Transparent, new Color(1f, 0.5f, 0.5f));
 
     // New fields
@@ -57,7 +57,10 @@ public class Building_TurretGunCE : Building_Turret
 
     #region Properties
     // Core properties
-    public virtual bool Active => (powerComp == null || powerComp.PowerOn) && (dormantComp == null || dormantComp.Awake) && (initiatableComp == null || initiatableComp.Initiated);
+    public virtual bool Active => (powerComp == null || powerComp.PowerOn) &&
+                                   (dormantComp == null || dormantComp.Awake) &&
+                                   (initiatableComp == null || initiatableComp.Initiated) &&
+                                   (hackableComp == null || !hackableComp.IsHacked);
     public CompEquippable GunCompEq => Gun.TryGetComp<CompEquippable>();
     public NonSnapTurretExtension NonSnapExtension => def.GetModExtension<NonSnapTurretExtension>();
     public bool NonSnap => NonSnapExtension != null;
@@ -193,6 +196,7 @@ public class Building_TurretGunCE : Building_Turret
         initiatableComp = GetComp<CompInitiatable>();
         powerComp = GetComp<CompPowerTrader>();
         mannableComp = GetComp<CompMannable>();
+        hackableComp = GetComp<CompHackable>();
 
         if (!everSpawned && (!Map.IsPlayerHome || Faction != Faction.OfPlayer))
         {

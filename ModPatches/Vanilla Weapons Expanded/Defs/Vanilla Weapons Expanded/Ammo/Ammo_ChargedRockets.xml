@@ -6,7 +6,9 @@
 		<parent>AmmoRockets</parent>
 		<iconPath>UI/Icons/ThingCategories/CaliberRocket</iconPath>
 	</ThingCategoryDef>
+	
 	<!-- AmmoSet -->
+	
 	<CombatExtended.AmmoSetDef>
 		<defName>AmmoSet_ChargedRockets</defName>
 		<label>Charged rockets</label>
@@ -16,7 +18,9 @@
 			<Ammo_ChargedRocket_BB>Bullet_ThermobaricRocket</Ammo_ChargedRocket_BB>
 		</ammoTypes>
 	</CombatExtended.AmmoSetDef>
+	
 	<!-- Ammo -->
+	
 	<ThingDef Class="CombatExtended.AmmoDef" Name="ChargedRocketBase" ParentName="MediumAmmoBase" Abstract="True">
 		<description>An advanced rocket with a charged-ion payload. The warhead explodes in the air, releasing a wave of deadly electroshock.</description>
 		<statBases>
@@ -48,6 +52,7 @@
 		<ammoClass>ChargedRocketHEC</ammoClass>
 		<detonateProjectile>Bullet_AntiGrainRocket</detonateProjectile>
 	</ThingDef>
+	
 	<ThingDef Class="CombatExtended.AmmoDef" ParentName="ChargedRocketBase">
 		<defName>Ammo_ChargedRocket_ICP</defName>
 		<description>An advanced rocket with a prometheum payload. The magnesium warhead is exploded upon impact, launching molten slag and flaming liquid in all directions.</description>
@@ -64,6 +69,7 @@
 		<ammoClass>ChargedRocketICP</ammoClass>
 		<detonateProjectile>Bullet_PrometheumRocket</detonateProjectile>
 	</ThingDef>
+	
 	<ThingDef Class="CombatExtended.AmmoDef" ParentName="ChargedRocketBase">
 		<defName>Ammo_ChargedRocket_BB</defName>
 		<description>An advanced rocket with a thermobaric payload. The warhead is designed to destroy fortifications and structures.</description>
@@ -80,10 +86,61 @@
 		<ammoClass>ChargedRocketBB</ammoClass>
 		<detonateProjectile>Bullet_ThermobaricRocket</detonateProjectile>
 	</ThingDef>
+	
 	<!-- Projectiles -->
-	<ThingDef ParentName="BaseSPG9Rocket">
-		<defName>Bullet_AntiGrainRocket</defName>
+	
+	<ThingDef Name="BaseChargedMissile" ParentName="BaseExplosiveBullet" Abstract="true">
 		<thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
+		<graphicData>
+			<shaderType>TransparentPostLight</shaderType>
+		</graphicData>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<speed>0</speed>
+			<gravityFactor>16</gravityFactor>
+			<soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
+			<soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
+			<soundAmbient>MortarRound_Ambient</soundAmbient>
+			<flyOverhead>true</flyOverhead>
+			<dropsCasings>false</dropsCasings>
+			<shellingProps>
+				<iconPath>Things/WorldObjects/Munitions/Mortar</iconPath>
+				<tilesPerTick>0.03</tilesPerTick>
+				<range>3</range>
+			</shellingProps>
+		</projectile>
+		<comps>
+			<li Class="CombatExtended.CompProperties_ProjectileFleck">
+				<FleckDatas>
+					<li>
+						<fleck>Fleck_CERocketFlame</fleck>
+						<emissionsPerTick>7</emissionsPerTick>
+						<flecksPerEmission>3</flecksPerEmission>
+						<scale>1.5</scale>
+						<cutoffTickRange>25~60</cutoffTickRange>
+						<originOffset>0.4</originOffset>
+					</li>
+					<li>
+						<fleck>Fleck_CERocketSmokeTrail</fleck>
+						<emissionsPerTick>1</emissionsPerTick>
+						<rotation>0~360</rotation>
+						<scale>3</scale>
+						<flecksPerEmission>1</flecksPerEmission>
+					</li>
+					<li>
+						<fleck>Fleck_CERocketSmoke</fleck>
+						<emissionsPerTick>2</emissionsPerTick>
+						<rotation>0~360</rotation>
+						<scale>2</scale>
+						<flecksPerEmission>1</flecksPerEmission>
+						<cutoffTickRange>25~60</cutoffTickRange>
+					</li>
+				</FleckDatas>
+			</li>
+		</comps>		
+	</ThingDef>
+	
+	<ThingDef ParentName="BaseChargedMissile">
+		<defName>Bullet_AntiGrainRocket</defName>
 		<label>charged rocket (HE-C)</label>
 		<graphicData>
 			<texPath>Things/Projectile/RPG/Frag</texPath>
@@ -91,11 +148,9 @@
 			<shaderType>TransparentPostLight</shaderType>
 		</graphicData>
 		<projectile Class="CombatExtended.ProjectilePropertiesCE">
-			<speed>100</speed>
 			<damageDef>EMP</damageDef>
 			<explosionRadius>8</explosionRadius>
 			<damageAmountBase>300</damageAmountBase>
-			<soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
 			<suppressionFactor>3.0</suppressionFactor>
 		</projectile>
 		<comps>
@@ -113,9 +168,9 @@
 			</li>
 		</comps>
 	</ThingDef>
-	<ThingDef ParentName="BaseSPG9Rocket">
+	
+	<ThingDef ParentName="BaseChargedMissile">
 		<defName>Bullet_PrometheumRocket</defName>
-		<thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
 		<label>charged rocket (ICP)</label>
 		<graphicData>
 			<texPath>Things/Projectile/RPG/Frag</texPath>
@@ -123,14 +178,12 @@
 			<shaderType>TransparentPostLight</shaderType>
 		</graphicData>
 		<projectile Class="CombatExtended.ProjectilePropertiesCE">
-			<speed>100</speed>
 			<damageDef>PrometheumFlame</damageDef>
 			<explosionRadius>6</explosionRadius>
 			<damageAmountBase>45</damageAmountBase>
 			<postExplosionSpawnThingDef>FilthPrometheum</postExplosionSpawnThingDef>
 			<preExplosionSpawnChance>0.8</preExplosionSpawnChance>
 			<soundExplode>MortarIncendiary_Explode</soundExplode>
-			<soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
 			<suppressionFactor>3.0</suppressionFactor>
 			<ai_IsIncendiary>true</ai_IsIncendiary>
 		</projectile>
@@ -148,6 +201,7 @@
 			</li>
 		</comps>
 	</ThingDef>
+	
 	<ThingDef ParentName="BaseFragment">
 		<defName>Bullet_MoltenSlag</defName>
 		<label>molten slag</label>
@@ -161,13 +215,11 @@
 			<explosionRadius>1.9</explosionRadius>
 			<postExplosionSpawnThingDef>FilthPrometheum</postExplosionSpawnThingDef>
 			<preExplosionSpawnChance>0.5</preExplosionSpawnChance>
-			<speed>80</speed>
-			<gravityFactor>12</gravityFactor>
 		</projectile>
 	</ThingDef>
-	<ThingDef ParentName="BaseSPG9Rocket">
+	
+	<ThingDef ParentName="BaseChargedMissile">
 		<defName>Bullet_ThermobaricRocket</defName>
-		<thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
 		<label>charged rocket (BB)</label>
 		<graphicData>
 			<texPath>Things/Projectile/RPG/Frag</texPath>
@@ -179,8 +231,6 @@
 			<damageDef>Thump</damageDef>
 			<armorPenetrationSharp>1.2</armorPenetrationSharp>
 			<armorPenetrationBlunt>12.4</armorPenetrationBlunt>
-			<speed>100</speed>
-			<flyOverhead>false</flyOverhead>
 			<explosionRadius>3.9</explosionRadius>
 			<soundExplode>MortarIncendiary_Explode</soundExplode>
 			<soundHitThickRoof>Artillery_HitThickRoof</soundHitThickRoof>
@@ -206,7 +256,9 @@
 			</li>
 		</comps>
 	</ThingDef>
+	
 	<!-- Recipes -->
+	
 	<RecipeDef ParentName="ChargeAmmoRecipeBase">
 		<defName>MakeAmmo_ChargedRocket</defName>
 		<label>make charged rocket (HE-C) x1</label>
@@ -259,6 +311,7 @@
 			<Ammo_ChargedRocket>1</Ammo_ChargedRocket>
 		</products>
 	</RecipeDef>
+	
 	<RecipeDef ParentName="ChargeAmmoRecipeBase">
 		<defName>MakeAmmo_ChargedRocket_ICP</defName>
 		<label>make charged rocket (ICP) x1</label>
@@ -311,6 +364,7 @@
 			<Ammo_ChargedRocket_ICP>1</Ammo_ChargedRocket_ICP>
 		</products>
 	</RecipeDef>
+	
 	<RecipeDef ParentName="ChargeAmmoRecipeBase">
 		<defName>MakeAmmo_ChargedRocket_BB</defName>
 		<label>make charged rocket (BB) x1</label>
