@@ -47,7 +47,7 @@ public class Building_TurretGunCE : Building_Turret
     private CompAmmoUser compAmmo = null;
     private CompFireModes compFireModes = null;
     private CompChangeableProjectile compChangeable = null;
-    private CompOrbitalTurret compOrbitalTurret = null;
+    private OrbitalTurretExtension orbitalTurretExtension = null;
     public bool isReloading = false;
     private int ticksUntilAutoReload = 0;
     private bool everSpawned = false;
@@ -158,15 +158,15 @@ public class Building_TurretGunCE : Building_Turret
         }
     }
 
-    public CompOrbitalTurret CompOrbitalTurret
+    public OrbitalTurretExtension OrbitalTurretExtension
     {
         get
         {
-            if (compOrbitalTurret == null && Gun != null)
+            if (orbitalTurretExtension == null && Gun != null)
             {
-                compOrbitalTurret = Gun.TryGetComp<CompOrbitalTurret>();
+                orbitalTurretExtension = Gun.def.GetModExtension<OrbitalTurretExtension>();
             }
-            return compOrbitalTurret;
+            return orbitalTurretExtension;
         }
     }
 

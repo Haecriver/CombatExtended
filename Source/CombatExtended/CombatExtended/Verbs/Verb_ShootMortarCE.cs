@@ -2,6 +2,7 @@
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
+using VEF;
 using Verse;
 using Verse.Sound;
 
@@ -118,10 +119,10 @@ public class Verb_ShootMortarCE : Verb_ShootCE
         // Shelling across layers
         if (globalSourceInfo.Tile.Layer != globalTargetInfo.Tile.Layer)
         {
-            CompOrbitalTurret compOrbitalTurret = caster.TryGetComp<CompOrbitalTurret>();
-            if (compOrbitalTurret != null && compOrbitalTurret.Props.interLayerPrecisionBonusFactor != 0)
+            OrbitalTurretExtension orbitalTurretExtension = caster.def.GetModExtension<OrbitalTurretExtension>();
+            if (orbitalTurretExtension != null && orbitalTurretExtension.interLayerPrecisionBonusFactor != 0)
             {
-                shotDist = shotDist / compOrbitalTurret.Props.interLayerPrecisionBonusFactor;
+                shotDist = shotDist / orbitalTurretExtension.interLayerPrecisionBonusFactor;
             }
         }
 

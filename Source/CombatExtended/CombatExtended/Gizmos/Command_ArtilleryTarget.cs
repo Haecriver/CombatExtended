@@ -19,12 +19,12 @@ public class Command_ArtilleryTarget : Command
 
     #region Properties
 
-    bool CanShootOtherLayers => turret.CompOrbitalTurret != null;
+    bool CanShootOtherLayers => turret.OrbitalTurretExtension != null;
     ///// <summary>
     ///// When firing on orbital targets, it can be tricky to use binoculars ...
     ///// This disables the need of target mark.
     ///// </summary>
-    bool MandatoryMarkToFireOutBounds => turret.CompOrbitalTurret?.Props.isMarkMandatory ?? true;
+    bool MandatoryMarkToFireOutBounds => turret.OrbitalTurretExtension?.isMarkMandatory ?? true;
 
     public IEnumerable<Building_TurretGunCE> SelectedTurrets => others?.Select(o => o.turret) ?? new List<Building_TurretGunCE>() { turret };
 
