@@ -20,7 +20,7 @@ namespace CombatExtended.Compatibility.VGECompat;
  * I duplicated the code from Building_GravshipTurret here, adapting it to work with CE.
  */
 [StaticConstructorOnStartup]
-public class Building_GravshipTurretCE: Building_TurretGunCE
+public class Building_GravshipTurretCE : Building_TurretGunCE
 {
     public Building_TargetingTerminalCE linkedTerminal;
     private CustomOverlayDrawer overlayDrawer;
@@ -230,8 +230,10 @@ public class Building_GravshipTurretCE: Building_TurretGunCE
 
     #region adapting patch
     // HarmonyPatches/Building_TurretGun_Active_Patch
-    public override bool Active {
-        get {
+    public override bool Active
+    {
+        get
+        {
             if (!CanFire)
             {
                 return false;

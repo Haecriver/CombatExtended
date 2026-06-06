@@ -8,7 +8,7 @@ public class Command_VGEArtilleryTarget : Command_ArtilleryTarget
 {
     public CompWorldArtilleryCE compWorldArtillery;
 
-    protected override bool AdditionnalTargettingCondition(GlobalTargetInfo targetInfo) 
+    protected override bool AdditionnalTargettingCondition(GlobalTargetInfo targetInfo)
     {
         if (compWorldArtillery != null)
         {

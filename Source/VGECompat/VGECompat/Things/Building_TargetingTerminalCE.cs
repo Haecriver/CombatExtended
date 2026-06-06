@@ -98,7 +98,7 @@ public class Building_TargetingTerminalCE : Building_TargetingTerminal
                     SelectLinkedTurretGizmo = command;
                     continue;
                 }
-            } 
+            }
 
             yield return gizmo;
         }
@@ -135,7 +135,7 @@ public class Building_TargetingTerminalCE : Building_TargetingTerminal
         {
             turret.linkedTerminal?.Unlink();
         }
-        linkedTurretCE= turret;
+        linkedTurretCE = turret;
         turret.LinkTo(this);
         SoundDefOf.Tick_High.PlayOneShotOnCamera();
         DisableOverlay();

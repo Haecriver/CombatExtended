@@ -14,7 +14,7 @@ using Verse;
 namespace CombatExtended.Compatibility.VGECompat;
 
 [StaticConstructorOnStartup]
-public class Building_AnticraftEmitterCE: Building_GravshipTurretCE
+public class Building_AnticraftEmitterCE : Building_GravshipTurretCE
 {
     // serialization fields
     private bool isFiringBurst = false;

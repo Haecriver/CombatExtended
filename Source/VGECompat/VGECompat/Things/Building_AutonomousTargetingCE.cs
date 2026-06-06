@@ -14,7 +14,7 @@ using Verse;
 namespace CombatExtended.Compatibility.VGECompat;
 
 [StaticConstructorOnStartup]
-public class Building_AutonomousTargetingCE: Building_TargetingTerminalCE
+public class Building_AutonomousTargetingCE : Building_TargetingTerminalCE
 {
     private CompPowerTrader powerComp;
     private AutonomousTargetingExtension _extension;
