@@ -75,6 +75,10 @@
 			<li Class="CombatExtended.NonSnapTurretExtension">
 				<speed>0.25</speed>
 			</li>
+			<li Class="CombatExtended.OrbitalTurretExtension">
+                <interLayerPrecisionBonusFactor>20</interLayerPrecisionBonusFactor>
+                <isMarkMandatory>false</isMarkMandatory>
+            </li>
 		</value>
 	</Operation>
 
@@ -134,6 +138,10 @@
 			<li Class="CombatExtended.NonSnapTurretExtension">
 				<speed>0.125</speed>
 			</li>
+			<li Class="CombatExtended.OrbitalTurretExtension">
+                <interLayerPrecisionBonusFactor>20</interLayerPrecisionBonusFactor>
+                <isMarkMandatory>false</isMarkMandatory>
+            </li>
 		</value>
 	</Operation>
 
@@ -205,6 +213,10 @@
 			<li Class="CombatExtended.NonSnapTurretExtension">
 				<speed>0.6</speed>
 			</li>
+			<li Class="CombatExtended.OrbitalTurretExtension">
+                <interLayerPrecisionBonusFactor>20</interLayerPrecisionBonusFactor>
+                <isMarkMandatory>false</isMarkMandatory>
+            </li>
 		</value>
 	</Operation>
 

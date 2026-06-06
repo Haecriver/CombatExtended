@@ -42,8 +42,6 @@ public class TravelingShell : TravelingThing
         get => (shellDef.projectile as ProjectilePropertiesCE).shellingProps.tilesPerTick;
     }
 
-    public bool IsInstant => (shellDef.projectile as ProjectilePropertiesCE).isInstant;
-
     public override bool ExpandingIconFlipHorizontal
     {
         get => GenWorldUI.WorldToUIPosition(Start).x > GenWorldUI.WorldToUIPosition(End).x;

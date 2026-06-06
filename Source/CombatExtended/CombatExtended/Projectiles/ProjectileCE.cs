@@ -487,6 +487,7 @@ public abstract class ProjectileCE : ThingWithComps
         bool useSameHeight = false
     )
     {
+
         float magicSpreadFactor = Mathf.Sin(0.06f / 2 * Mathf.Deg2Rad) + aperatureSize;
         float magicLaserDamageConstant = 1 / (magicSpreadFactor * magicSpreadFactor * 3.14159f);
 
@@ -528,7 +529,6 @@ public abstract class ProjectileCE : ThingWithComps
                 break;
             }
             var iv3 = tp.ToIntVec3();
-
             if (!iv3.InBounds(map))
             {
                 tp = ray.GetPoint(i - 1);
@@ -546,7 +546,6 @@ public abstract class ProjectileCE : ThingWithComps
                 lbce.SpawnBeam(muzzle, destination);
                 RayCastSuppression(muzzle.ToIntVec3(), destination.ToIntVec3());
                 lbce.Impact(null, muzzle);
-
                 return;
 
             }
@@ -610,7 +609,6 @@ public abstract class ProjectileCE : ThingWithComps
             lbce.SpawnBeam(muzzle, destination);
             RayCastSuppression(muzzle.ToIntVec3(), destination.ToIntVec3());
             Destroy(DestroyMode.Vanish);
-
             return;
         }
     }

@@ -3,9 +3,7 @@ using RimWorld.Planet;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using Verse;
-using static UnityEngine.GraphicsBuffer;
 
 namespace CombatExtended;
 
