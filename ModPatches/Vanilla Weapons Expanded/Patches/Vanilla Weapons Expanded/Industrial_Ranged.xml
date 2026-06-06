@@ -685,6 +685,10 @@
 		<researchPrerequisite>PrecisionRifling</researchPrerequisite>
 		<AllowWithRunAndGun>false</AllowWithRunAndGun>
 	</Operation>
+	
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="VWE_Gun_AntiMaterialRifle"]/equippedStatOffsets/MoveSpeed</xpath>
+	</Operation>
 
 	<!-- === Marksman Rifle (SVD) === -->
 	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">

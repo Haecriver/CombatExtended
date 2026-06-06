@@ -8,7 +8,7 @@
 		<li IfModActive="Ludeon.Rimworld.Ideology">Ideology</li>
 		<li IfModActive="Ludeon.Rimworld.Biotech">Biotech</li>
 		<li IfModActive="Ludeon.Rimworld.Anomaly">Anomaly</li>
-		<li IfModActive="Ludeon.Rimworld.Odyssey">Odyssey</li>		
+		<li IfModActive="Ludeon.Rimworld.Odyssey">Odyssey</li>
 		<!-- Mod Patches -->
 		<li IfModActive="Torann.ARimworldOfMagic">ModPatches/A Rimworld of Magic</li>
 		<li IfModActive="ADE.AdvancedTurrets.Mod">ModPatches/ADE Advanced Turrets</li>
@@ -60,7 +60,7 @@
 		<li IfModActive="Shinzy.Apparello">ModPatches/Apparello</li>
 		<li IfModActive="scpchemfuel.appliances">ModPatches/Appliances Expanded</li>
 		<li IfModActive="AR13S.Arachne1point0, Mlie.ArachneRace">ModPatches/Arachne</li>
-		<li IfModActive="ALIEN.ArasakaCorporation">ModPatches/Arasaka Corporation</li>
+		<li IfModActive="ALIEN.ArasakaCorporation, Elktor.ArasakaCorporation">ModPatches/Arasaka Corporation</li>
 		<li IfModActive="Teok25.ArchotechExpanded">ModPatches/Archotech Expanded</li>
 		<li IfModActive="Teok25.ArchotechExpanded.Prosthetics">ModPatches/Archotech Expanded Prosthetics</li>
 		<li IfModActive="New.ArchotechPowerArmor">ModPatches/Archotech PowerArmor</li>
@@ -79,12 +79,12 @@
 		<li IfModActive="veltaris.mechtech">ModPatches/AV Mechtech</li>
 		<li IfModActive="veltaris.mechqueen">ModPatches/AV Work Queen</li>
 		<li IfModActive="automatic.autocleaner">ModPatches/Autocleaner</li>
-		<li IfModActive="Bean.TurretPack">ModPatches/Bean's Turret Pack</li>		
+		<li IfModActive="Bean.TurretPack">ModPatches/Bean's Turret Pack</li>
 		<li IfModActive="Heymyteamrules.BeastManTribes">ModPatches/Beast Man Tribes</li>
 		<li IfModActive="Mlem.beeralope">ModPatches/Beeralope Squad</li>
 		<li IfModActive="ElSov.Beliar">ModPatches/Beliar Xenotype</li>
 		<li IfModActive="Starppole.Beta.AnimeHair1.6">ModPatches/Beta Anime Hair</li>
-		<li IfModActive="Beta.GuPHAA">ModPatches/Beta GnP Hair and Apparel</li>		
+		<li IfModActive="Beta.GuPHAA">ModPatches/Beta GnP Hair and Apparel</li>
 		<li IfModActive="shunter.bettertradersguild">ModPatches/Better Traders Guild</li>
 		<li IfModActive="divineDerivative.AutoWool">ModPatches/Better Wool Production</li>
 		<li IfModActive="RedMattis.Heaven">ModPatches/Big and Small - Heaven and Hell</li>
@@ -94,7 +94,8 @@
 		<li IfModActive="RedMattis.BigSmall.Core">ModPatches/Big and Small Genes</li>
 		<li IfModActive="RedMattis.BigSmall">ModPatches/Big and Small Races</li>
 		<li IfModActive="RedMattis.BigWeapons">ModPatches/Big and Small Weapons</li>
-		<li IfModActive="Ushanka.BiologicalWarfare">ModPatches/BiologicalWarfare</li>
+		<li IfModActive="Koni.Misc.BioferriteChainsaw">ModPatches/Bioferrite Chainsaw</li>
+		<li IfModActive="Ushanka.BiologicalWarfare">ModPatches/Biological Warfare</li>
 		<li IfModActive="BiomesTeam.BiomesCaverns">ModPatches/Biomes Caverns</li>
 		<li IfModActive="BiomesTeam.BiomesCore">ModPatches/Biomes Core</li>
 		<li IfModActive="BiomesTeam.BiomesPollutedLands">ModPatches/Biomes Polluted Lands</li>
@@ -247,6 +248,7 @@
 		<li IfModActive="CVN.BloodPact">ModPatches/Grimworld Sabbats Blight</li>
 		<li IfModActive="grimworld.scatteredsons">ModPatches/GrimWorld Scattered Sons</li>
 		<li IfModActive="grimworld.talonOfTheEmperor">ModPatches/GrimWorld Talons of the Emperor</li>
+		<li IfModActive="RimGFL2.Nagan.Ubludok">ModPatches/Girls Frontline 2 Nagan Apparel</li>
 		<li IfModActive="TenMoe.GFCL">ModPatches/Girls Frontline Apparel Pack</li>
 		<li IfModActive="RicoFox233.GirlsFrontline.404Team">ModPatches/Girls Frontline Styles 404 Team</li>
 		<li IfModActive="RicoFox233.GirlsFrontline.ARTeam">ModPatches/Girls Frontline Styles AR Team</li>
@@ -265,6 +267,7 @@
 		<li IfModActive="spoonshortage.gourimet">ModPatches/GouRIMet</li>
 		<li IfModActive="pphhyy.Gulden">ModPatches/Gulden Mod</li>
 		<li IfModActive="Monti.HalfDragons">ModPatches/Half Dragons</li>
+		<li IfModActive="Mlie.HALORimworldAuxiliaryCombatArmory">ModPatches/Halo - Rimworld Auxiliary Combat Armory</li>
 		<li IfModActive="HLX.RimworldUNSCArmoury">ModPatches/Halo - UNSC Armoury</li>
 		<li IfModActive="TheInfinityIQ.Halo.UNSC">ModPatches/Halo UNSC Weapon Pack</li>
 		<li IfModActive="Mlie.HaloRimworldPsychicPulseArmory">ModPatches/HALO Rimworld Psychic Pulse Armory</li>
@@ -286,7 +289,7 @@
 		<li IfModActive="jemlpro.Infusion2Expansion">ModPatches/Infused 2 Expansion</li>
 		<li IfModActive="latta.infusion">ModPatches/Infusion 2</li>
 		<li IfModActive="SirMashedPotato.InsectsHaveChitin">ModPatches/Insects have chitin</li>
-		<li IfModActive="catachat.inspirationtweaks">ModPatches/Inspiration Tweaks</li>		
+		<li IfModActive="catachat.inspirationtweaks">ModPatches/Inspiration Tweaks</li>
 		<li IfModActive="lts.I">ModPatches/Integrated Implants</li>
 		<li IfModActive="EL.IonWeaponry, zal.ionweaponry">ModPatches/Ion Weaponry</li>
 		<li IfModActive="JangoDsoul.CastleWalls,gideon.castlewalls">ModPatches/JDS Castle Walls</li>
@@ -513,6 +516,7 @@
 		<li IfModActive="zerophoenix.contractorsarsenalfaction">ModPatches/Rim Contractors Arsenal</li>
 		<li IfModActive="Fenn.floodrace,zal.floodrace">ModPatches/Rim Flood</li>
 		<li IfModActive="VexedTrees980.RimGnoblinsBiotech">ModPatches/Rim Gnoblins</li>
+		<li IfModActive="JTC.Nordberg">ModPatches/Rim Of Evil Northern Frontier</li>
 		<li IfModActive="sihv.rombones">ModPatches/Rim of Madness - Bones</li>
 		<li IfModActive="RimOfMadness.Vampires">ModPatches/Rim of Madness - Vampires</li>
 		<li IfModActive="RimofMadness.Werewolves">ModPatches/Rim of Madness - Werewolves</li>
@@ -609,7 +613,7 @@
 		<li IfModActive="Trickity.WC.Rags">ModPatches/T's Wild Child Rags</li>
 		<li IfModActive="balistafreak.TacticalExtremityProtection">ModPatches/Tactical Extremity Protection [BAL]</li>
 		<li IfModActive="TextilesPlus.velcroboy333">ModPatches/Textiles+</li>
-		<li IfModActive="Pyro.TieredMechs">ModPatches/Tiered Mechs</li>		
+		<li IfModActive="Pyro.TieredMechs">ModPatches/Tiered Mechs</li>
 		<li IfModActive="MortStrudel.CorporationFaction">ModPatches/The Corporation - Mort's Factions</li>
 		<li IfModActive="HC.GiantRace">ModPatches/The GiantRace</li>
 		<li IfModActive="sarg.jorisexperience">ModPatches/The Joris Experience</li>
@@ -633,7 +637,7 @@
 		<li IfModActive="eatKenny.leafzxg.TurretCollection">ModPatches/Turret Collection</li>
 		<li IfModActive="Mlie.TwilekRace">ModPatches/Twi'lek Race</li>
 		<li IfModActive="UltraEmailMan.MoreMechanitorMechs">ModPatches/UEM More Mechanitor Mechs</li>
-		<li IfModActive="UNAGI.A.D.coat">ModPatches/UNAGI Another Duster Coat</li>		
+		<li IfModActive="UNAGI.A.D.coat">ModPatches/UNAGI Another Duster Coat</li>
 		<li IfModActive="wool.UselessClothes">ModPatches/Useless Clothes</li>
 		<li IfModActive="Ushanka.GlittertechExpansion">ModPatches/Ushankas Glittertech Expansion</li>
 		<li IfModActive="Kilo.VacSlipsuit">ModPatches/VacSlipsuit</li>
@@ -660,7 +664,8 @@
 		<li IfModActive="VanillaExpanded.BaseGeneration">ModPatches/Vanilla Base Generation Expanded</li>
 		<li IfModActive="VanillaExpanded.VBrewE">ModPatches/Vanilla Brewing Expanded</li>
 		<li IfModActive="VanillaExpanded.VChemfuelE">ModPatches/Vanilla Chemfuel Expanded</li>
-		<li IfModActive="VanillaExpanded.VEE">ModPatches/Vanilla Events Expanded</li>		
+		<li IfModActive="VanillaExpanded.VEE">ModPatches/Vanilla Events Expanded</li>
+		<li IfModActive="OskarPotocki.VanillaFactionsExpanded.Core">ModPatches/Vanilla Expanded Framework</li>
 		<li IfModActive="VanillaExpanded.VFEA">ModPatches/Vanilla Factions Expanded - Ancients</li>
 		<li IfModActive="OskarPotocki.VFE.Classical">ModPatches/Vanilla Factions Expanded - Classical</li>
 		<li IfModActive="OskarPotocki.VFE.Deserters">ModPatches/Vanilla Factions Expanded - Deserters</li>

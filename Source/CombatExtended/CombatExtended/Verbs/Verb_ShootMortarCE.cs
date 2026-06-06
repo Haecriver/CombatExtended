@@ -2,6 +2,7 @@
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
+using VEF;
 using Verse;
 using Verse.Sound;
 
@@ -112,7 +113,20 @@ public class Verb_ShootMortarCE : Verb_ShootCE
             return null;
         }
         ShiftVecReport report = base.ShiftVecReportFor(target);
-        report.circularMissRadius = GetGlobalMissRadiusForDist(report.shotDist);
+
+        float shotDist = report.shotDist;
+
+        // Shelling across layers
+        if (globalSourceInfo.Tile.Layer != globalTargetInfo.Tile.Layer)
+        {
+            OrbitalTurretExtension orbitalTurretExtension = caster.def.GetModExtension<OrbitalTurretExtension>();
+            if (orbitalTurretExtension != null && orbitalTurretExtension.interLayerPrecisionBonusFactor != 0)
+            {
+                shotDist = shotDist / orbitalTurretExtension.interLayerPrecisionBonusFactor;
+            }
+        }
+
+        report.circularMissRadius = GetGlobalMissRadiusForDist(shotDist);
         report.weatherShift = (1f - globalTargetInfo.Map.weatherManager.CurWeatherAccuracyMultiplier) * 1.5f + (1 - globalSourceInfo.Map.weatherManager.CurWeatherAccuracyMultiplier) * 0.5f;
 
         ArtilleryMarker marker = null;
@@ -221,8 +235,6 @@ public class Verb_ShootMortarCE : Verb_ShootCE
                     shotSpeed,
                     EquipmentSource);
             }
-           
-            pelletMechanicsOnly = true;
         }
 
         /*

@@ -30,7 +30,7 @@
 		<worldObjectClass>CombatExtended.TravelingRaycast</worldObjectClass>
 		<texture>Things/WorldObjects/Munitions/Shell_Invisible</texture>
 		<useDynamicDrawer>true</useDynamicDrawer>
-		<expandingIcon>false</expandingIcon>
+		<expandingIcon>true</expandingIcon>
 	</WorldObjectDef>
 
 </Defs>

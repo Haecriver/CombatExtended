@@ -132,7 +132,8 @@ public class Verb_ShootCE : Verb_LaunchProjectileCE
 
     public override ThingDef Projectile => CompAmmo?.CurrentAmmo != null ? CompAmmo.CurAmmoProjectile : base.Projectile;
 
-    public override float ShotHeight { 
+    public override float ShotHeight
+    {
         get
         {
             if (projectilePropsCE.isInstant && projectilePropsCE.flyOverhead)
@@ -142,12 +143,10 @@ public class Verb_ShootCE : Verb_LaunchProjectileCE
                 // - Use for VGE patch
                 // - see also CombatExtended.Compatibility.SOS2Compat.Verb_ShootShip_CE.ShotHeight
                 return 4f;
-            } 
+            }
             return base.ShotHeight;
         }
     }
-        
-
 
     #endregion
 

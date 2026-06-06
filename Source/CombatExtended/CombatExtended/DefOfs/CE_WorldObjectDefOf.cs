@@ -10,5 +10,4 @@ public static class CE_WorldObjectDefOf
     }
     public static WorldObjectDef TravelingShell;
     public static WorldObjectDef TravelingRaycast;
-
 }

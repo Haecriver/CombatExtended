@@ -48,7 +48,23 @@ public class GizmoAmmoStatus : Gizmo_Slider
         return "CE_ReloadAmmoTooltip".Translate();
     }
 
-    public override string BarLabel => compAmmo.CurMagCount + " / " + compAmmo.MagSize;
+    public override string BarLabel
+    {
+        get
+        {
+            if (compAmmo.HasMagazine)
+            {
+                return compAmmo.CurMagCount + " / " + compAmmo.MagSize;
+            }
+            else
+            {
+                int sameTypeMags = compAmmo.MagsLeftSameTypeReadOnly;
+                int otherTypesMags = compAmmo.MagsLeftReadOnly - sameTypeMags;
+                return sameTypeMags + (otherTypesMags > 0 ? " (+" + otherTypesMags + ")" : string.Empty);
+            }
+        }
+    }
+
     public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maxWidth, GizmoRenderParms parms)
     {
         if (IsDraggable)

@@ -2,24 +2,39 @@ using RimWorld;
 using RimWorld.Planet;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Verse;
 using static UnityEngine.GraphicsBuffer;
 
 namespace CombatExtended;
+
 public class Command_ArtilleryTarget : Command
 {
+    #region Fields
+
     public Building_TurretGunCE turret;
 
     public List<Command_ArtilleryTarget> others = null;
 
-    public bool mandatoryMarkToFireOutBounds = true;
+    #endregion
+
+    #region Properties
+
+    bool CanShootOtherLayers => turret.OrbitalTurretExtension != null;
+    ///// <summary>
+    ///// When firing on orbital targets, it can be tricky to use binoculars ...
+    ///// This disables the need of target mark.
+    ///// </summary>
+    bool MandatoryMarkToFireOutBounds => turret.OrbitalTurretExtension?.isMarkMandatory ?? true;
 
     public IEnumerable<Building_TurretGunCE> SelectedTurrets => others?.Select(o => o.turret) ?? new List<Building_TurretGunCE>() { turret };
 
     public override bool GroupsWith(Gizmo other) => other is Command_ArtilleryTarget;
+
+    #endregion
+
+    #region Methods
 
     public override void MergeWith(Gizmo other)
     {
@@ -69,14 +84,20 @@ public class Command_ArtilleryTarget : Command
                 IEnumerable<Building_TurretGunCE> turrets = SelectedTurrets;
                 Map map = Find.World.worldObjects.MapParentAt(targetInfo.Tile)?.Map ?? null;
 
+                if (!CanShootOtherLayers && targetInfo.Tile.Layer != turretTile.Layer)
+                {
+                    Messages.Message("CE_Message_ArtilleryBadLayer".Translate(), MessageTypeDefOf.RejectInput, false);
+                    return false;
+                }
+
                 // We only want player to target world object when there's no colonist in the map
                 // Only if mark is needed
-                if (map != null && (!mandatoryMarkToFireOutBounds || map.mapPawns.AnyPawnBlockingMapRemoval))
+                if (map != null && (!MandatoryMarkToFireOutBounds || map.mapPawns.AnyPawnBlockingMapRemoval))
                 {
                     return AttackWorldTile(turrets, targetInfo, map);
                 }
 
-               return AttackWorldObject(turrets, targetInfo);
+                return AttackWorldObject(turrets, targetInfo);
             },
             canTargetTiles: true,
             closeWorldTabWhenFinished: true,
@@ -89,11 +110,11 @@ public class Command_ArtilleryTarget : Command
                         int radius2 = Mathf.FloorToInt(t.MaxWorldRange);
                         if (radius2 != radius)
                         {
-                            ShellingUtility.CachedDrawTurretRadiusRing(t.Tile, radius2);
+                            ShellingUtility.CachedDrawTurretRadiusRing(t.Tile, radius2, CanShootOtherLayers);
                         }
                     }
                 }
-                ShellingUtility.CachedDrawTurretRadiusRing(turretTile, radius);
+                ShellingUtility.CachedDrawTurretRadiusRing(turretTile, radius, CanShootOtherLayers);
             },
             extraLabelGetter: (targetInfo) =>
             {
@@ -148,7 +169,7 @@ public class Command_ArtilleryTarget : Command
             {
                 if (
                 // Is unvalid
-                !targetInfo.HasWorldObject 
+                !targetInfo.HasWorldObject
                 // Fire on its own tile
                 || targetInfo.Tile == turretTile
                 // World object has neither a Map nor a HealthComp (ennemy faction)
@@ -183,7 +204,6 @@ public class Command_ArtilleryTarget : Command
         return attackStarted;
     }
 
-
     private bool AttackWorldTile(IEnumerable<Building_TurretGunCE> turrets, GlobalTargetInfo targetInfo, Map map)
     {
         IntVec3 selectedCell = IntVec3.Invalid;
@@ -213,9 +233,9 @@ public class Command_ArtilleryTarget : Command
                 Messages.Message("CE_ArtilleryTarget_NoThickRoof".Translate(), MessageTypeDefOf.RejectInput);
                 return false;
             }
-            
+
             // Marker condition
-            if (mandatoryMarkToFireOutBounds && target.Cell.GetFirstThing<ArtilleryMarker>(map) == null)
+            if (MandatoryMarkToFireOutBounds && target.Cell.GetFirstThing<ArtilleryMarker>(map) == null)
             {
                 Messages.Message("CE_ArtilleryTarget_MustTargetMark".Translate(), MessageTypeDefOf.RejectInput);
                 return false;
@@ -269,4 +289,5 @@ public class Command_ArtilleryTarget : Command
         }
         return TryAttack(turrets, targetInfo, LocalTargetInfo.Invalid);
     }
+    #endregion
 }

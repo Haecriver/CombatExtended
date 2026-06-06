@@ -4,6 +4,7 @@ using UnityEngine;
 using Verse;
 
 namespace CombatExtended;
+
 public class TravelingRaycast : TravelingShell
 {
     public Verb_ShootCE verbToUse;

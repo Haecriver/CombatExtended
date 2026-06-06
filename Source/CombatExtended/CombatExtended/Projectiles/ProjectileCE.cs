@@ -107,6 +107,10 @@ public abstract class ProjectileCE : ThingWithComps
 
             return ((float)this.damageAmount) * RemainingKineticEnergyPct;
         }
+        set
+        {
+            damageAmount = value;
+        }
     }
     public virtual float PenetrationAmount
     {
@@ -612,16 +616,16 @@ public abstract class ProjectileCE : ThingWithComps
     }
 
     public void RayCastWorldTarget(
-        Thing launcher,
-        Verb_ShootCE verbToUse,
-        Vector2 originLocal,
-        float shotAngle,
-        float shotHeight,
-        float shotSpeed = -1f,
-        float spreadDegrees = 0f,
-        float aperatureSize = 0.03f,
-        Thing equipment = null
-    )
+       Thing launcher,
+       Verb_ShootCE verbToUse,
+       Vector2 originLocal,
+       float shotAngle,
+       float shotHeight,
+       float shotSpeed = -1f,
+       float spreadDegrees = 0f,
+       float aperatureSize = 0.03f,
+       Thing equipment = null
+   )
     {
         if (!globalTargetInfo.IsValid)
         {
@@ -650,10 +654,11 @@ public abstract class ProjectileCE : ThingWithComps
             0, // no need
             equipment
         );
-       
+
         // --- Creating shell to use linked mechanics
 
-        Props.shellingProps.tilesPerTick = 99999; // instant speeeeed !
+        // Seen with N7Huntsman, it's better to let the user decide the speed, as instant projectiles can be railguns.
+        // Props.shellingProps.tilesPerTick = 99999; // instant speeeeed !
 
         TravelingRaycast travelingRaycast = (TravelingRaycast)WorldObjectMaker.MakeWorldObject(CE_WorldObjectDefOf.TravelingRaycast);
         if (launcher?.Faction != null)
