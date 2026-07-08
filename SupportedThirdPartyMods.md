@@ -218,6 +218,7 @@ Edge of Descension - Monoblades  |
 Edge of Descension - Vanguard   |
 Edo Themed Expansion	|
 Eltex Bodysuit  |
+Eltex Weaponry (Continued)  |
 Enchanted Sword  |
 Epochs - Pyrinth    |
 Epona The centaur race  |
@@ -529,6 +530,7 @@ RimFantasy - Medieval Overhaul Edition   |
 RimFantasy - House Doyle   |
 RimHammer40k - Dreadnought |
 RimNauts 2 |
+RimOfTheFallen |
 Rimrats |
 RimSec Security |
 Rimsenal - Core |
@@ -569,7 +571,7 @@ Simply More Melee	|
 Slime Rancher	|
 Solark Race |
 Spacer Arsenal  |
-Spacer Pack |
+Spacer Pack - Repackaged |
 Spacer Shields	|
 Space Worms (Continued) |
 Spartan Foundry	|
@@ -600,6 +602,7 @@ The Joris Experience	|
 The Tuffalo |
 The Sims Traits |
 Thog's Armor    |
+Thog's Guns - Lead and Powder Pack REPRIMED 1.6  |
 Thog's Guns - More Brukka Pack  |
 Thrumbo Plushie |
 Titan Vehicles Continued |
@@ -658,6 +661,7 @@ Vanilla Psycasts Expanded - Runesmith   |
 Vanilla Quests Expanded - Ancients  |
 Vanilla Quests Expanded - Cryptoforge  |
 Vanilla Quests Expanded - Deadlife  |
+Vanilla Quests Expanded - Drone Factory  |
 Vanilla Races Expanded - Android  |
 Vanilla Races Expanded - Archon |
 Vanilla Races Expanded - Fungoid |
