@@ -1647,6 +1647,20 @@ public abstract class ProjectileCE : ThingWithComps
             return;
         }
 
+        ProjectilePropertiesCE projectileCE = def.projectile as ProjectilePropertiesCE;
+
+        // If this projectile is not supposed to detonate in space-like terrain, skip explosion if needed
+        if (!projectileCE.detonateInSpace)
+        {
+            var terrain = explodePos.ToIntVec3().GetTerrain(Map);
+            // If the terrain is "Space", destroy the projectile without detonating
+            if (terrain.defName == "Space")
+            {
+                Destroy();
+                return;
+            }
+        }
+
         if (def.projectile.explosionEffect != null)
         {
             Effecter effecter = def.projectile.explosionEffect.Spawn();
@@ -1657,7 +1671,6 @@ public abstract class ProjectileCE : ThingWithComps
         {
             def.projectile.landedEffecter.Spawn(Position, Map, 1f).Cleanup();
         }
-        ProjectilePropertiesCE projectileCE = def.projectile as ProjectilePropertiesCE;
         float effectScale = projectileCE.detonateEffectsScaleOverride > 0 ? projectileCE.detonateEffectsScaleOverride : projectileCE.explosionRadius * 2;
         if (projectileCE.detonateMoteDef != null)
         {
