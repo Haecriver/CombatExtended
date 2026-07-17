@@ -62,7 +62,7 @@
 			<gravityFactor>10</gravityFactor>
 			<shellingProps>
 				<tilesPerTick>0.05</tilesPerTick>
-				<range>16</range> <!-- based on VanillaGravshipExpanded.CompProperties_WorldArtillery.worldMapAttackRange -->
+				<range>20</range> <!-- based on VanillaGravshipExpanded.CompProperties_WorldArtillery.worldMapAttackRange -->
 				<arrivedAtSameProps>true</arrivedAtSameProps>
 			</shellingProps>
 		</projectile>
@@ -282,7 +282,7 @@
 			<shellingProps>
 				<iconPath>Things/Projectiles/Rocket_Javelin</iconPath>
 				<tilesPerTick>0.05</tilesPerTick>
-				<range>16</range> <!-- based on VanillaGravshipExpanded.CompProperties_WorldArtillery.worldMapAttackRange -->
+				<range>20</range> <!-- based on VanillaGravshipExpanded.CompProperties_WorldArtillery.worldMapAttackRange -->
 				<damage>0.1</damage>
 			</shellingProps>
 		</projectile>

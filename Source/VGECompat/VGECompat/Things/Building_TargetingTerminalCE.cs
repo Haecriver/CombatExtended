@@ -16,25 +16,38 @@ using Verse.Sound;
 namespace CombatExtended.Compatibility.VGECompat;
 
 [StaticConstructorOnStartup]
-public class Building_TargetingTerminalCE : Building_TargetingTerminal
+public class Building_TargetingTerminalCE : Building_TargetingTerminal, ITurretLinkerCE
 {
     public Building_GravshipTurretCE linkedTurretCE;
-
+    public List<Building_GravshipTurretCE> linkedTurretsCE = new List<Building_GravshipTurretCE>();
+    public virtual IEnumerable<Building_GravshipTurretCE> LinkedTurretsCE => linkedTurretsCE;
     public override void ExposeData()
     {
-        // skip the linkedTurret save/load, we don't need it
+        // skip the linkedTurret save/load, we don't need its
         linkedTurret = null;
         base.ExposeData();
 
         Scribe_References.Look(ref linkedTurretCE, "linkedTurretCE");
+        Scribe_Collections.Look(ref linkedTurretsCE, "linkedTurretsCE", LookMode.Reference);
+        if (Scribe.mode == LoadSaveMode.PostLoadInit)
+        {
+            linkedTurretsCE ??= new List<Building_GravshipTurretCE>();
+            if (linkedTurretCE != null && !linkedTurretsCE.Contains(linkedTurretCE))
+            {
+                linkedTurretsCE.Add(linkedTurretCE);
+            }
+            linkedTurretsCE.RemoveAll(x => x == null);
+            linkedTurretCE = null;
+        }
     }
 
     public override void SpawnSetup(Map map, bool respawningAfterLoad)
     {
-        linkedTurret = new Building_GravshipTurret(); // dummy to skip overlaty logic in base.SpawnSetup
+        // dummy value to skip logic in base.SpawnSetup
+        linkedTurrets = new List<Building_GravshipTurret>() {  new Building_GravshipTurret() };
         base.SpawnSetup(map, respawningAfterLoad);
 
-        if (linkedTurretCE == null)
+        if (linkedTurretsCE.Count == 0)
         {
             EnableOverlay();
         }
@@ -43,24 +56,31 @@ public class Building_TargetingTerminalCE : Building_TargetingTerminal
     public override void Tick()
     {
         // skip the turret unlink from base.Tick (because this instance is not spawned and never will be)
-        linkedTurret = null;
+        linkedTurrets = new List<Building_GravshipTurret>();
         base.Tick();
 
         // VGE logic
-        if (linkedTurretCE != null && (linkedTurretCE.Destroyed || !linkedTurretCE.Spawned))
+        for (int i = linkedTurretsCE.Count - 1; i >= 0; i--)
         {
-            Unlink();
+            var turret = linkedTurretsCE[i];
+            if (turret.Destroyed || !turret.Spawned)
+            {
+                Unlink(turret);
+            }
         }
     }
 
     public override void DrawExtraSelectionOverlays()
     {
-        linkedTurret = null; // skip the turret unlink from base.DrawExtraSelectionOverlays
+        // skip the turret unlink from base.DrawExtraSelectionOverlays
+        linkedTurrets = new List<Building_GravshipTurret>();
+
         base.DrawExtraSelectionOverlays();
 
-        if (linkedTurretCE != null)
+        // VGE logic
+        foreach (var turret in linkedTurretsCE)
         {
-            GenDraw.DrawLineBetween(this.TrueCenter(), linkedTurretCE.TrueCenter(), SimpleColor.White);
+            GenDraw.DrawLineBetween(this.TrueCenter(), turret.TrueCenter(), SimpleColor.White);
         }
     }
 
@@ -68,93 +88,44 @@ public class Building_TargetingTerminalCE : Building_TargetingTerminal
     {
         if (linkedTurretCE != null)
         {
-            linkedTurret = new Building_GravshipTurret(); // dummy to skip base unlink logic
+            linkedTurrets = new List<Building_GravshipTurret>(); // dummy to skip base unlink logic
         }
 
-        Gizmo LinkWithTurretGizmo = null;
-        Gizmo UnlinkWithTurretGizmo = null;
-        Gizmo SelectLinkedTurretGizmo = null;
-        foreach (var gizmo in base.GetGizmos())
+        foreach (var gizmo in this.GetLinkerGizmos(LinkRange))
         {
-            if (gizmo is Command_Action command)
-            {
-                if (command.defaultLabel == "VGE_LinkWithTurret".Translate())
-                {
-                    command.action = StartLinking;
-                    LinkWithTurretGizmo = command;
-                    continue;
-                }
-
-                if (command.defaultLabel == "VGE_UnlinkWithTurret".Translate())
-                {
-                    command.action = Unlink;
-                    UnlinkWithTurretGizmo = command;
-                    continue;
-                }
-
-                if (command.defaultLabel == "VGE_SelectLinkedTurret".Translate())
-                {
-                    command.action = SelectLinkedTurret;
-                    SelectLinkedTurretGizmo = command;
-                    continue;
-                }
-            }
-
             yield return gizmo;
         }
+    }
 
-        // copy VGE logic
-        if (linkedTurretCE == null)
+    public virtual void LinkTo(Building_GravshipTurretCE turret)
+    {
+        if (linkedTurretsCE.Count >= MaxLinkedTurrets)
         {
-            if (LinkWithTurretGizmo != null)
+            Unlink(linkedTurrets[0]);
+        }
+        linkedTurretsCE.Add(turret);
+        turret.LinkTo(this);
+    }
+
+    public virtual void Unlink(Building_GravshipTurretCE turret)
+    {
+        if (linkedTurretsCE.Remove(turret))
+        {
+            turret.unlinking = true;
+            turret.Unlink();
+            turret.unlinking = false;
+            if (linkedTurretsCE.Count == 0 && !Destroyed && Spawned)
             {
-                yield return LinkWithTurretGizmo;
+                EnableOverlay();
             }
         }
-        else if (UnlinkWithTurretGizmo != null && SelectLinkedTurretGizmo != null)
-        {
-            yield return UnlinkWithTurretGizmo;
-            yield return SelectLinkedTurretGizmo;
-        }
-    }
-    private new void StartLinking()
-    {
-        base.StartLinking();
-        // intercept the targeting logic
-        Find.Targeter.targetParams.validator = (TargetInfo t) => t.Thing is Building_GravshipTurretCE && t.Thing.Position.InHorDistOf(this.Position, 36);
-        Find.Targeter.action = delegate (LocalTargetInfo t)
-        {
-            var turret = t.Thing as Building_GravshipTurretCE;
-            LinkTo(turret);
-        };
-    }
-
-    public void LinkTo(Building_GravshipTurretCE turret)
-    {
-        if (turret.linkedTerminal != null)
-        {
-            turret.linkedTerminal?.Unlink();
-        }
-        linkedTurretCE = turret;
-        turret.LinkTo(this);
-        SoundDefOf.Tick_High.PlayOneShotOnCamera();
-        DisableOverlay();
     }
 
     public new void Unlink()
     {
-        linkedTurretCE?.Unlink();
-        linkedTurretCE = null;
-        SoundDefOf.Tick_Low.PlayOneShotOnCamera();
-        EnableOverlay();
-    }
-
-    public new void SelectLinkedTurret()
-    {
-        if (linkedTurretCE != null)
+        for (int i = linkedTurretsCE.Count - 1; i >= 0; i--)
         {
-            Find.Selector.ClearSelection();
-            Find.Selector.Select(linkedTurretCE);
+            Unlink(linkedTurretsCE[i]);
         }
     }
 }

@@ -580,7 +580,7 @@ public class Building_TurretGunCE : Building_Turret
         }
     }
 
-    public float BurstCooldownTime()             // Core method
+    public virtual float BurstCooldownTime()             // Core method
     {
         if (def.building.turretBurstCooldownTime >= 0f)
         {

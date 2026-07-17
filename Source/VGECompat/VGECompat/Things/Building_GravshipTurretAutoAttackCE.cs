@@ -14,6 +14,6 @@ namespace CombatExtended.Compatibility.VGECompat;
 [StaticConstructorOnStartup]
 public class Building_GravshipTurretAutoAttackCE : Building_GravshipTurretCE
 {
-    public override bool CanAutoAttack => true;
+    public override bool CanAutoAttack => !permanentlyDisabled;
 }
 

@@ -3,6 +3,7 @@ using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using VanillaGravshipExpanded;
 using Verse;
 using Verse.AI;
@@ -21,12 +22,45 @@ namespace CombatExtended.Compatibility.VGECompat;
 [StaticConstructorOnStartup]
 public class Building_EnemyMechTurretCE : Building_GravshipTurretCE
 {
+    private List<Map> cachedMapsInRange;
     public override bool CanFire => true;
     public override bool CanAutoAttack => true;
     public override float GravshipTargeting => 1f;
     protected override bool CanSetForcedTarget => true;
 
     protected override bool ShowNoLinkedTerminalOverlay => false;
+
+    public override float BurstCooldownTime()
+    {
+        float cooldown = base.BurstCooldownTime();
+        float factor = 1f;
+        float flat = 0f;
+        int bufferLinks = 0;
+        foreach (var b in Map.listerBuildings.allBuildingsNonColonist)
+        {
+            if (b.Faction == Faction)
+            {
+                if (b.TryGetComp<CompEnemyTerminal>() is CompEnemyTerminal terminal && terminal.IsManned)
+                {
+                    factor *= terminal.Props.cooldownFactor;
+                    flat += terminal.Props.cooldownFlatOffset;
+                }
+                if (b.TryGetComp<CompEnemyTurretBuffer>() is CompEnemyTurretBuffer buffer && buffer.Active && buffer.Props.validTurrets.Contains(this.def) && b.Position.DistanceTo(this.Position) <= buffer.Props.radius)
+                {
+                    if (buffer.Props.cooldownReductionTicks > 0)
+                    {
+                        flat += buffer.Props.cooldownReductionTicks;
+                        bufferLinks++;
+                        if (bufferLinks >= buffer.Props.maxLinks){ 
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return Mathf.Max(6.33f, (cooldown * factor) - (flat / 60f));
+    }
+
     private int GetTargetPriority(Thing t)
     {
         if (t is Building_GravshipTurret)
@@ -73,8 +107,29 @@ public class Building_EnemyMechTurretCE : Building_GravshipTurretCE
         // replace vge artillery comp with our logic
         if (IsMortar && Active && Faction.IsPlayerSafe() && ProjectileProps?.shellingProps != null)
         {
-            var maps = Find.Maps.Where(x => GravshipHelper.GetDistance(Map.Tile, x.Tile) <= ProjectileProps?.shellingProps.range).OrderBy(x => GravshipHelper.GetDistance(Map.Tile, x.Tile)).ToList();
-            foreach (var map in maps)
+            if (cachedMapsInRange == null || this.IsHashIntervalTick(250))
+            {
+                var mapsWithDist = new List<(Map map, float distance)>();
+                foreach (var map in Find.Maps)
+                {
+                    if (map == null || map.Disposed)
+                    {
+                        continue;
+                    }
+                    if (map.IsPocketMap is false)
+                    {
+                        float dist = GravshipHelper.GetDistance(Map.Tile, map.Tile);
+                        if (dist <= MaxWorldRange) // Here, we use our MaxWorldRange
+                        {
+                            mapsWithDist.Add((map, dist));
+                        }
+                    }
+                }
+                mapsWithDist.Sort((a, b) => a.distance.CompareTo(b.distance));
+                cachedMapsInRange = mapsWithDist.Select(x => x.map).ToList();
+            }
+
+            foreach (var map in cachedMapsInRange)
             {
                 var target = GetTargetForMap(map);
                 if (target.IsValid)
@@ -153,20 +208,39 @@ public class Building_EnemyMechTurretCE : Building_GravshipTurretCE
             return true;
         };
 
-        var potentialTargets = new List<Thing>();
+        var seenTargets = new Dictionary<Thing, int>();
         foreach (IAttackTarget target in map.attackTargetsCache.GetPotentialTargetsFor(this))
         {
             if (innerValidator(target))
             {
-                potentialTargets.Add(target.Thing);
+                seenTargets.TryAdd(target.Thing, GetTargetPriority(target.Thing));
             }
         }
-        potentialTargets.AddRange(map.listerBuildings.allBuildingsColonist.Where(x => GetTargetPriority(x) < 10));
-        potentialTargets = potentialTargets.Distinct().ToList();
-        potentialTargets.SortBy(t => GetTargetPriority(t));
+        foreach (var building in map.listerBuildings.allBuildingsColonist)
+        {
+            if (!seenTargets.ContainsKey(building))
+            {
+                int priority = GetTargetPriority(building);
+                if (priority < 10)
+                {
+                    seenTargets[building] = priority;
+                }
+            }
+        }
+        var potentialTargets = seenTargets.OrderBy(x => x.Value).Select(x => x.Key).ToList();
         foreach (Thing target in potentialTargets)
         {
-            return target;
+            if (map == Map)
+            {
+                if (verb.CanHitTarget(target))
+                {
+                    return target;
+                }
+            }
+            else
+            {
+                return target;
+            }
         }
         return LocalTargetInfo.Invalid;
     }

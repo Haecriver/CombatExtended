@@ -136,7 +136,7 @@
 		<xpath>Defs/ThingDef[defName="VGE_JavelinPod"]</xpath>
 		<value>
 			<li Class="CombatExtended.NonSnapTurretExtension">
-				<speed>0.125</speed>
+				<speed>0.250</speed>
 			</li>
 			<li Class="CombatExtended.OrbitalTurretExtension">
                 <interLayerPrecisionBonusFactor>20</interLayerPrecisionBonusFactor>

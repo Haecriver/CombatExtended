@@ -1,5 +1,6 @@
 ﻿using RimWorld;
 using System.Collections.Generic;
+using System.Linq;
 using VanillaGravshipExpanded;
 using VEF.Graphics;
 using Verse;
@@ -22,30 +23,33 @@ namespace CombatExtended.Compatibility.VGECompat;
 [StaticConstructorOnStartup]
 public class Building_GravshipTurretCE : Building_TurretGunCE
 {
-    public Building_TargetingTerminalCE linkedTerminal;
+    public ITurretLinkerCE linkedTerminal;
     private CustomOverlayDrawer overlayDrawer;
+    public bool unlinking;
 
-    public virtual bool CanFire => linkedTerminal?.MannedByPlayer ?? false;
+    public bool permanentlyDisabled;
+    public void DisablePermanently()
+    {
+        permanentlyDisabled = true;
+        currentTargetInt = LocalTargetInfo.Invalid;
+        forcedTarget = LocalTargetInfo.Invalid;
+        burstWarmupTicksLeft = 0;
+        if (Faction is not null)
+        {
+            SetFaction(null);
+        }
+    }
+    public virtual bool CanFire => !permanentlyDisabled && (linkedTerminal?.MannedByPlayer ?? false);
 
     public virtual bool CanAutoAttack => false;
-    public Pawn ManningPawn => linkedTerminal?.MannableComp?.ManningPawn;
+    public Pawn ManningPawn => linkedTerminal?.ManningPawn;
 
     // TODO: This field should be used to modify accuracy
     public virtual float GravshipTargeting => linkedTerminal?.GravshipTargeting ?? 0f;
 
     protected virtual bool ShowNoLinkedTerminalOverlay => true;
 
-    protected override bool CanSetForcedTarget
-    {
-        get
-        {
-            if (linkedTerminal != null && linkedTerminal.MannedByPlayer)
-            {
-                return true;
-            }
-            return false;
-        }
-    }
+    protected override bool CanSetForcedTarget => !permanentlyDisabled && linkedTerminal != null && linkedTerminal.MannedByPlayer;
 
     public override void SpawnSetup(Map map, bool respawningAfterLoad)
     {
@@ -67,9 +71,13 @@ public class Building_GravshipTurretCE : Building_TurretGunCE
     public override void Tick()
     {
         base.Tick();
-        if (linkedTerminal != null && (linkedTerminal.Destroyed || !linkedTerminal.Spawned))
+        if (linkedTerminal != null)
         {
-            Unlink();
+            var linkerThing = linkedTerminal.LinkerThing;
+            if (linkerThing is null || linkerThing.Destroyed || !linkedTerminal.LinkerThing.Spawned && linkedTerminal is not Apparel)
+            {
+                Unlink();
+            }
         }
     }
 
@@ -77,12 +85,21 @@ public class Building_GravshipTurretCE : Building_TurretGunCE
     {
         base.ExposeData();
         Scribe_References.Look(ref linkedTerminal, "linkedTerminal");
+        Scribe_Values.Look(ref permanentlyDisabled, "permanentlyDisabled");
     }
 
     public override string GetInspectString()
     {
         string text = base.GetInspectString();
-        if (Faction == Faction.OfPlayer && linkedTerminal == null)
+        if (permanentlyDisabled)
+        {
+            if (!text.NullOrEmpty())
+            {
+                text += "\n";
+            }
+            text += "VGE_PermanentlyDisabled".Translate();
+        }
+        else if (ShowNoLinkedTerminalOverlay && Faction == Faction.OfPlayer && linkedTerminal == null)
         {
             if (!text.NullOrEmpty())
             {
@@ -93,11 +110,23 @@ public class Building_GravshipTurretCE : Building_TurretGunCE
         return text;
     }
 
-    public void LinkTo(Building_TargetingTerminalCE terminal)
+    public float GetLocalForcedMissRadius(float baseMissRadius)
     {
-        terminal.linkedTurretCE?.Unlink();
+        return GravshipHelper.CalculateAdjustedForcedMissRadius(baseMissRadius, this.Map, this.def, this.Position, this.Faction, this.GravshipTargeting, useMapMultiplier: true);
+    }
+
+    public void LinkTo(ITurretLinkerCE terminal)
+    {
+        if (linkedTerminal == terminal)
+        {
+            return;
+        }
         linkedTerminal = terminal;
-        terminal.linkedTurretCE = this;
+        if (terminal != null && !terminal.LinkedTurretsCE.Contains(this))
+        {
+            terminal.LinkTo(this);
+        }
+
         SoundDefOf.Tick_High.PlayOneShotOnCamera();
         DisableOverlay();
         linkedTerminal.DisableOverlay();
@@ -110,25 +139,33 @@ public class Building_GravshipTurretCE : Building_TurretGunCE
         ResetForcedTarget();
         ResetCurrentTarget();
 
-        if (linkedTerminal != null)
-        {
-            linkedTerminal.EnableOverlay();
-            linkedTerminal.linkedTurretCE = null;
-        }
+        var prevTerminal = linkedTerminal;
         linkedTerminal = null;
-        SoundDefOf.Tick_Low.PlayOneShotOnCamera();
-        if (ShowNoLinkedTerminalOverlay)
+        if (prevTerminal != null && !unlinking)
         {
-            EnableOverlay();
+            prevTerminal.Unlink(this);
+        }
+        else
+        {
+            SoundDefOf.Tick_Low.PlayOneShotOnCamera();
+            if (ShowNoLinkedTerminalOverlay)
+            {
+                EnableOverlay();
+            }
         }
     }
 
     private void SelectLinkedTerminal()
     {
-        if (linkedTerminal != null)
+        if (linkedTerminal != null && linkedTerminal.LinkerThing != null)
         {
             Find.Selector.ClearSelection();
-            Find.Selector.Select(linkedTerminal);
+            Find.Selector.Select(linkedTerminal.LinkerThing);
+        }
+        else if (linkedTerminal != null)
+        {
+            Find.Selector.ClearSelection();
+            Find.Selector.Select((Thing)linkedTerminal);
         }
     }
     private void StartLinking()
@@ -146,6 +183,39 @@ public class Building_GravshipTurretCE : Building_TurretGunCE
             LinkTo(terminal);
         }, onGuiAction: delegate { GenDraw.DrawRadiusRing(this.Position, 36f); });
     }
+
+    public override LocalTargetInfo TryFindNewTarget()
+    {
+        // HarmonyPatches/Building_TurretGun_TryFindNewTarget_Patch
+        if (!CanAutoAttack)
+        {
+            return LocalTargetInfo.Invalid;
+        }
+        if (permanentlyDisabled)
+        {
+            return LocalTargetInfo.Invalid;
+        }
+        return base.TryFindNewTarget();
+    }
+
+    public override void OrderAttack(LocalTargetInfo targ)
+    {
+        if (permanentlyDisabled)
+        {
+            return;
+        }
+        base.OrderAttack(targ);
+    }
+
+    public override void DrawExtraSelectionOverlays()
+    {
+        base.DrawExtraSelectionOverlays();
+        if (linkedTerminal != null && linkedTerminal.LinkerThing != null && linkedTerminal.LinkerThing.Spawned)
+        {
+            GenDraw.DrawLineBetween(this.TrueCenter(), linkedTerminal.LinkerThing.DrawPos, SimpleColor.White);
+        }
+    }
+
     public override IEnumerable<Gizmo> GetGizmos()
     {
         foreach (var gizmo in base.GetGizmos())
@@ -153,7 +223,11 @@ public class Building_GravshipTurretCE : Building_TurretGunCE
             if (gizmo is Command_VerbTarget command && command.defaultLabel == "CommandSetForceAttackTarget".Translate())
             {
                 command.icon = Building_GravshipTurret.ForceTargetIcon;
-                if (!CanFire)
+                if (linkedTerminal is Apparel)
+                {
+                    command.Disable("VGE_MustBeAimedViaEquippedTargeter".Translate());
+                }
+                else if (!CanFire)
                 {
                     command.Disable("VGE_NeedsMannedTargetingTerminal".Translate());
                 }
@@ -175,7 +249,7 @@ public class Building_GravshipTurretCE : Building_TurretGunCE
             yield return gizmo;
         }
 
-        if (Faction != Faction.OfPlayer)
+        if (Faction != Faction.OfPlayer || permanentlyDisabled)
         {
             yield break;
         }
@@ -250,16 +324,6 @@ public class Building_GravshipTurretCE : Building_TurretGunCE
 
     // HarmonyPatches/Building_TurretGun_ResetForcedTarget_Patch
     // No need to override ResetForcedTarget, we don't use VGE CompWorldArtillery
-
-    // HarmonyPatches/Building_TurretGun_TryFindNewTarget_Patch
-    public override LocalTargetInfo TryFindNewTarget()
-    {
-        if (!CanAutoAttack)
-        {
-            return LocalTargetInfo.Invalid;
-        }
-        return base.TryFindNewTarget();
-    }
 
     // HarmonyPatches/Building_TurretGun_TryStartShootSomething_Patch
     // No need to override TryStartShootSomething, as we don't use their code for turret rotation
