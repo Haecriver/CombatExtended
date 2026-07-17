@@ -46,7 +46,7 @@
 		<li IfModActive="bbbbilly.ancienthuman">ModPatches/Ancient Human</li>
 		<li IfModActive="Killathon.AndroidTiersReforged">ModPatches/Android Tiers Reforged</li>
 		<li IfModActive="ChJees.Androids, ChJees.Androids14">ModPatches/Androids</li>
-		<li IfModActive="peptide.androidsexpanded, rielle.androidsexpanded">ModPatches/Androids Expanded</li>
+		<li IfModActive="peptide.androidsexpanded, peptide.androidsexpanded14, rielle.androidsexpanded">ModPatches/Androids Expanded</li>
 		<li IfModActive="hh.xrushha.AnimaAnimalsCombined">ModPatches/Anima Animals - Community Temp</li>
 		<li IfModActive="Seti.Victor.AnimaBodies">ModPatches/Anima Bionics</li>
 		<li IfModActive="xrushha.AnimaGear">ModPatches/Anima Gear</li>
@@ -359,7 +359,7 @@
 		<li IfModActive="Abraxas.MSERevived">ModPatches/Medical System Expansion - Revived</li>
 		<li IfModActive="MSE2.Core">ModPatches/Medical System Expansion 2</li>
 		<li IfModActive="Mlie.MedicalSupplements">ModPatches/Medicine Supplements (Continued)</li>
-		<li IfModActive="Arisher.Medieval.Bowyer">ModPatches/Medieval Bowyer</li>
+		<li IfModActive="zal.medievalbowyer">ModPatches/Medieval Bowyer</li>
 		<li IfModActive="Gerrymon.MCO">ModPatches/Medieval Coastal Outfits</li>
 		<li IfModActive="JoeDaly.MedMeds.MO">ModPatches/Medieval Medicines 1.4 Medieval Overhaul Edition</li>
 		<li IfModActive="DankPyon.Medieval.Overhaul">ModPatches/Medieval Overhaul</li>
@@ -395,7 +395,7 @@
 		<li IfModActive="noodlesking.MorePsycasts">ModPatches/More Psycasts</li>
 		<li IfModActive="SGC.moreutilitypacks,zal.moreutilitypacks">ModPatches/More Utility Packs</li>
 		<li IfModActive="paradox.morevanillaturrets">ModPatches/More Vanilla Turrets</li>
-		<li IfModActive="Orion.MoreMechanoids">ModPatches/MoreMechanoids</li>
+		<li IfModActive="Orion.MoreMechanoids, zal.moremechanoids">ModPatches/MoreMechanoids</li>
 		<li IfModActive="Morgante.MorganteMafiaWeaponsPack_copy">ModPatches/Morgante Mafia Weapons Pack</li>
 		<li IfModActive="Morgante.WW2ItalianWeapons_copy">ModPatches/Morgante WW2 Italian Weapons</li>
 		<li IfModActive="SirMashedPotato.MorrowRim">ModPatches/MorrowRim</li>
@@ -464,8 +464,8 @@
 		<li IfModActive="Pratt.RaW.WWIIWeaponsPackVanilla">ModPatches/Pratt WWII Weapons Pack</li>
 		<li IfModActive="Kilo.PrestigeVacSet">ModPatches/Prestige Vacsuit Set</li>
 		<li IfModActive="PrestigePhoenix.maltum">ModPatches/Prestige Specialist Armor</li>
-		<li IfModActive="PrimitiveCore.velcroboy333">ModPatches/Primitive Core</li>
-		<li IfModActive="primitiveproduction.velcroboy333">ModPatches/Primitive Workbenches</li>
+		<li IfModActive="PrimitiveCore.velcroboy333, zal.primitivecore">ModPatches/Primitive Core</li>
+		<li IfModActive="primitiveproduction.velcroboy333, zal.primitiveproduction">ModPatches/Primitive Workbenches</li>
 		<li IfModActive="botchjob.profaned">ModPatches/Profaned</li>
 		<li IfModActive="PRF.Materials">ModPatches/Project RimFactory - Materials</li>
 		<li IfModActive="DimonSever000.ProsthesesPlus13.Specific">ModPatches/Prostheses+</li>
@@ -513,7 +513,7 @@
 		<li IfModActive="mlie.removeindustrialstuff">ModPatches/Remove Industrial Stuff</li>
 		<li IfModActive="FS.ReviaRace">ModPatches/Revia Race</li>
 		<li IfModActive="FS.ReviaRaceBiotech">ModPatches/Revia Race — biotech</li>
-		<li IfModActive="zerophoenix.contractorsarsenalfaction">ModPatches/Rim Contractors Arsenal</li>
+		<li IfModActive="zerophoenix.contractorsarsenalfaction,zal.contractorsarsenal">ModPatches/Rim Contractors Arsenal</li>
 		<li IfModActive="Fenn.floodrace,zal.floodrace">ModPatches/Rim Flood</li>
 		<li IfModActive="VexedTrees980.RimGnoblinsBiotech">ModPatches/Rim Gnoblins</li>
 		<li IfModActive="JTC.Nordberg">ModPatches/Rim Of Evil Northern Frontier</li>
@@ -540,6 +540,7 @@
 		<li IfModActive="Sierra.RF.MedievalOverhaul">ModPatches/RimFantasy - Medieval Overhaul Edition</li>
 		<li IfModActive="Aoba.GeryKnights.Dreadnought">ModPatches/RimHammer40k -Dreadnought</li>
 		<li IfModActive="sindre0830.rimnauts2">ModPatches/RimNauts 2</li>
+		<li IfModActive="zawodroshen.RimOfTheFallen">ModPatches/RimOfTheFallen</li>
 		<li IfModActive="Mlie.Rimrats">ModPatches/Rimrats</li>
 		<li IfModActive="shakesthespeare.RimsecSecurity">ModPatches/RimSec-Security</li>
 		<li IfModActive="Sierra.RT.GeneralTraits">ModPatches/RimTraits - General Traits</li>
@@ -594,7 +595,7 @@
 		<li IfModActive="PunkyRoo.SlimeRancher">ModPatches/Slime Rancher</li>
 		<li IfModActive="Ayameduki.HARSolark">ModPatches/Solark Race</li>
 		<li IfModActive="det.spacerarsenal">ModPatches/Spacer Arsenal</li>
-		<li IfModActive="notdvd.spacerpack">ModPatches/Spacer Pack</li>
+		<li IfModActive="notdvd.spacerpack2">ModPatches/Spacer Pack</li>
 		<li IfModActive="LTS.PS">ModPatches/Spacer Shields</li>
 		<li IfModActive="Mlie.SpaceWorms">ModPatches/Spaceworm</li>
 		<li IfModActive="HALO.RSF, Mlie.RimworldSpartanFoundry">ModPatches/Spartan Foundry</li>
@@ -622,7 +623,8 @@
 		<li IfModActive="Goji.TheSimsTraits">ModPatches/The Sims Traits</li>
 		<li IfModActive="TheVanityProject.ShibaInu">ModPatches/The Vanity Project - Shiba Inu</li>
 		<li IfModActive="Serek.TheWildFields">ModPatches/The Wild Fields</li>
-		<li IfModActive="Caninmyham.ThogsArmor">ModPatches/Thog's Armor</li>
+		<li IfModActive="Caninmyham.ThogsArmor, Caninmyham.ThogsArmor.temp15">ModPatches/Thog's Armor</li>
+		<li IfModActive="Caninmyham.ThogsGunsLeadAndPowderPackReprimedfixed">ModPatches/Thog's Guns - Lead and Powder Pack</li>
 		<li IfModActive="Caninmyham.ThogsGun_sBrukkaReprimed">ModPatches/Thog's Guns - More Brukka Pack</li>
 		<li IfModActive="Arquebus.ThrumboPlushie">ModPatches/Thrumbo Plushie</li>
 		<li IfModActive="syrchalis.thrumkin">ModPatches/Thrumkin</li>
@@ -691,6 +693,7 @@
 		<li IfModActive="Chairheir.VPERunesmith">ModPatches/Vanilla Psycasts Expanded - Runesmith</li>
 		<li IfModActive="vanillaquestsexpanded.cryptoforge">ModPatches/Vanilla Quests Expanded - Cryptoforge</li>
 		<li IfModActive="vanillaquestsexpanded.deadlife">ModPatches/Vanilla Quests Expanded - Deadlife</li>
+		<li IfModActive="vanillaquestsexpanded.dronefactory">ModPatches/Vanilla Quests Expanded - Drone Factory</li>
 		<li IfModActive="vanillaquestsexpanded.ancients">ModPatches/Vanilla Quests Expanded - Ancients</li>
 		<li IfModActive="vanillaracesexpanded.android">ModPatches/Vanilla Races Expanded - Android</li>
 		<li IfModActive="vanillaracesexpanded.archon">ModPatches/Vanilla Races Expanded - Archon</li>
