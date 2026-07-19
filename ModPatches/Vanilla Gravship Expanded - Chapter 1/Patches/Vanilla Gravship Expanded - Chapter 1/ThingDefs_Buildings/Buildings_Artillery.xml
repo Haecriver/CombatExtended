@@ -26,6 +26,23 @@
 		<value>CombatExtended.Compatibility.VGECompat.CompProperties_WorldArtilleryCE</value>
 	</Operation>
 
+	<!-- Add OrbitalTurretExtension to guns -->
+    <Operation Class="PatchOperationAddModExtension">
+		<xpath>
+			Defs/ThingDef[
+				defName = "VGE_Gun_GaussGun" or
+				defName = "VGE_Gun_JavelinPod" or
+				defName = "VGE_Gun_AnticraftCaster"
+			]
+		</xpath>
+		<value>
+			<li Class="CombatExtended.OrbitalTurretExtension">
+                <interLayerPrecisionBonusFactor>20</interLayerPrecisionBonusFactor>
+                <isMarkMandatory>false</isMarkMandatory>
+            </li>
+		</value>
+	</Operation>
+
 	<!-- Remove fuel comps -->
     <Operation Class="PatchOperationRemove">
 		<xpath>
@@ -66,10 +83,6 @@
 			<li Class="CombatExtended.NonSnapTurretExtension">
 				<speed>0.25</speed>
 			</li>
-			<li Class="CombatExtended.OrbitalTurretExtension">
-                <interLayerPrecisionBonusFactor>20</interLayerPrecisionBonusFactor>
-                <isMarkMandatory>false</isMarkMandatory>
-            </li>
 		</value>
 	</Operation>
 
@@ -129,10 +142,6 @@
 			<li Class="CombatExtended.NonSnapTurretExtension">
 				<speed>0.250</speed>
 			</li>
-			<li Class="CombatExtended.OrbitalTurretExtension">
-                <interLayerPrecisionBonusFactor>20</interLayerPrecisionBonusFactor>
-                <isMarkMandatory>false</isMarkMandatory>
-            </li>
 		</value>
 	</Operation>
 
@@ -204,10 +213,6 @@
 			<li Class="CombatExtended.NonSnapTurretExtension">
 				<speed>0.6</speed>
 			</li>
-			<li Class="CombatExtended.OrbitalTurretExtension">
-                <interLayerPrecisionBonusFactor>20</interLayerPrecisionBonusFactor>
-                <isMarkMandatory>false</isMarkMandatory>
-            </li>
 		</value>
 	</Operation>
 
