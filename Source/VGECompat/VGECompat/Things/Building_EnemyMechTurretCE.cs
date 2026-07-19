@@ -51,7 +51,8 @@ public class Building_EnemyMechTurretCE : Building_GravshipTurretCE
                     {
                         flat += buffer.Props.cooldownReductionTicks;
                         bufferLinks++;
-                        if (bufferLinks >= buffer.Props.maxLinks){ 
+                        if (bufferLinks >= buffer.Props.maxLinks)
+                        {
                             break;
                         }
                     }

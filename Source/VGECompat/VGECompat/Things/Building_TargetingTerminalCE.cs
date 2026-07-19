@@ -44,7 +44,7 @@ public class Building_TargetingTerminalCE : Building_TargetingTerminal, ITurretL
     public override void SpawnSetup(Map map, bool respawningAfterLoad)
     {
         // dummy value to skip logic in base.SpawnSetup
-        linkedTurrets = new List<Building_GravshipTurret>() {  new Building_GravshipTurret() };
+        linkedTurrets = new List<Building_GravshipTurret>() { new Building_GravshipTurret() };
         base.SpawnSetup(map, respawningAfterLoad);
 
         if (linkedTurretsCE.Count == 0)
