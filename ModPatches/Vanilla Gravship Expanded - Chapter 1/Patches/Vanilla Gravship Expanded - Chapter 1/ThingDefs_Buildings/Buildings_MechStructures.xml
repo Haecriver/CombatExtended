@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+    <!-- === VGE_MechTurretBase === -->
+
+    <!-- Replace thing class -->
+    <Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="VGE_MechTurretBase"]/thingClass</xpath>
+		<value>
+			<thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+		</value>
+	</Operation>
+
+
+    <!-- === MassDriver === -->
+
+    <!-- Replace thing class -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>
+			Defs/ThingDef[defName = "VGE_MassDriver"]/thingClass 
+		</xpath>
+		<value>
+			<thingClass>CombatExtended.Compatibility.VGECompat.Building_EnemyMechTurretCE</thingClass>
+		</value>
+	</Operation>
+
+    <!-- Remove useless mod extensions from VGE -->
+	<Operation Class="PatchOperationRemove">
+		<xpath>
+			Defs/ThingDef[defName = "VGE_MassDriver"]/modExtensions 
+		</xpath>
+	</Operation>
+
+    <!-- Add or own mod extensions -->
+    <Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="VGE_MassDriver"]</xpath>
+		<value>
+			<li Class="CombatExtended.NonSnapTurretExtension">
+				<speed>0.04</speed>
+			</li>
+			<li Class="CombatExtended.OrbitalTurretExtension">
+                <interLayerPrecisionBonusFactor>20</interLayerPrecisionBonusFactor>
+                <isMarkMandatory>false</isMarkMandatory>
+            </li>
+		</value>
+	</Operation>
+
+    <!-- Add stat bases for gun -->
+    <Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="VGE_Gun_MassDriver"]</xpath>
+		<value>
+            <statBases>
+                <AimingAccuracy>0.3</AimingAccuracy>
+                <NightVisionEfficiency>0.6</NightVisionEfficiency>
+            </statBases>
+		</value>
+	</Operation>
+
+    <!-- Add replace their comp with our comp -->
+
+    <Operation Class="PatchOperationAttributeSet">
+		<xpath>
+			Defs/ThingDef[
+                defName = "VGE_MassDriver"
+			]/comps/li[
+				@Class = "VanillaGravshipExpanded.CompProperties_WorldArtillery"
+			]
+		</xpath>
+		<attribute>Class</attribute>
+		<value>CombatExtended.Compatibility.VGECompat.CompProperties_WorldArtilleryCE</value>
+	</Operation>
+
+    <!-- Clean verbs -->
+
+	<Operation Class="PatchOperationRemove">
+		<xpath>
+			Defs/ThingDef[defName = "VGE_Gun_MassDriver"]/verbs 
+		</xpath>
+	</Operation>
+
+    <!-- Patch operation -->
+
+    <Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>VGE_Gun_MassDriver</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>2.59</RangedWeapon_Cooldown>
+			<SightsEfficiency>1.00</SightsEfficiency>
+			<ShotSpread>0.03</ShotSpread> <!-- base on 40k baneblade -->
+			<SwayFactor>1.0</SwayFactor>
+		</statBases>
+		<Properties>
+			<verbClass>CombatExtended.Compatibility.VGECompat.Verb_ShootWithSmokeCE</verbClass>
+			<defaultProjectile>VGE_Bullet_MassDriver_CE</defaultProjectile>
+			<range>700</range>
+			<minRange>28</minRange>
+			<burstShotCount>3</burstShotCount>
+			<ticksBetweenBurstShots>20</ticksBetweenBurstShots>
+            <soundCast>VGE_GravshipHowitzer</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+            <muzzleFlashScale>14</muzzleFlashScale>
+			<requireLineOfSight>false</requireLineOfSight>
+			<forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+			<isMortar>false</isMortar>
+			<targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+
+            <circularError>3</circularError>
+            <warmupTime>1.8</warmupTime>
+            <indirectFirePenalty>0.4</indirectFirePenalty>
+			<hasStandardCommand>false</hasStandardCommand>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>24</magazineSize>
+			<reloadTime>7.8</reloadTime>
+			<ammoSet>AmmoSet_VGE_Bullet_MassDriver</ammoSet>
+		</AmmoUser>
+	</Operation>
+
+</Patch>

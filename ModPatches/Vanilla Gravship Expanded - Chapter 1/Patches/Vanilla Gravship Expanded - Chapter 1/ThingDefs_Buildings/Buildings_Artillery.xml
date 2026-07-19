@@ -1,5 +1,6 @@
 <Patch>
-	<!-- Patch Buildings -->
+	<!-- === Patch Buildings === -->
+	<!-- Remove box refuel fuel comps -->
     <Operation Class="PatchOperationRemove">
 		<xpath>
 			Defs/ThingDef[
@@ -10,6 +11,7 @@
 		</xpath>
 	</Operation>
 	
+	<!-- Replace world artillery -->
     <Operation Class="PatchOperationAttributeSet">
 		<xpath>
 			Defs/ThingDef[
@@ -24,6 +26,7 @@
 		<value>CombatExtended.Compatibility.VGECompat.CompProperties_WorldArtilleryCE</value>
 	</Operation>
 
+	<!-- Remove fuel comps -->
     <Operation Class="PatchOperationRemove">
 		<xpath>
 			Defs/ThingDef[
@@ -35,25 +38,13 @@
 		</xpath>
 	</Operation>
 
+	<!-- Remove all verbs -->
 	<Operation Class="PatchOperationRemove">
 		<xpath>Defs/ThingDef[
 			defName = "VGE_Gun_GaussGun" or
 			defName = "VGE_Gun_JavelinPod" or
 			defName = "VGE_Gun_AnticraftCaster"
 			]/verbs</xpath>
-	</Operation>
-
-	<!-- === MassDriver (Ennemy turret) === -->
-
-	<Operation Class="PatchOperationReplace">
-		<xpath>
-			Defs/ThingDef[
-				defName = "VGE_MassDriver"
-			]/thingClass 
-		</xpath>
-		<value>
-			<thingClass>CombatExtended.Compatibility.VGECompat.Building_EnemyMechTurretCE</thingClass>
-		</value>
 	</Operation>
 
 	<!-- === GaussGun === -->
