@@ -1,4 +1,5 @@
 ﻿using RimWorld.Planet;
+using UnityEngine;
 using VanillaGravshipExpanded;
 using Verse;
 
@@ -35,7 +36,15 @@ public class CompWorldArtilleryCE : ThingComp
         }
         bool sourceIsOnGround = sourceMap.Tile.Valid && !sourceMap.Tile.LayerDef.isSpace;
         var mapParent = Find.WorldObjects.MapParentAt(target.Tile);
-        bool targetIsOnGround = mapParent.Map.Tile.Valid && !mapParent.Map.Tile.LayerDef.isSpace;
+        // Actually, we *can* fire at tile without map in CE.
+        // So this code is disabled
+        //if (mapParent == null || mapParent.Map == null)
+        //{
+        //    failReason = "VGE_GravshipArtilleryNeedsVisibleMap".Translate();
+        //    return false;
+        //}
+        //bool targetIsOnGround = mapParent.Map.Tile.Valid && !mapParent.Map.Tile.LayerDef.isSpace;
+        bool targetIsOnGround = target.Tile.Valid && !target.Tile.LayerDef.isSpace; // Check directly target tile
 
         ArtilleryFiringMode requiredMode;
         string invalidModeKey;

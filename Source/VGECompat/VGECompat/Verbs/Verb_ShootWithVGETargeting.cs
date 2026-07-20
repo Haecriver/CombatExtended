@@ -26,6 +26,11 @@ public class Verb_ShootWithVGETargeting : Verb_ShootMortarCE
     public override ShiftVecReport ShiftVecReportFor(GlobalTargetInfo target)
     {
         ShiftVecReport report = base.ShiftVecReportFor(target);
+        if (report == null)
+        {
+            return null;
+        }
+
         if (caster is Building_GravshipTurretCE Turret)
         {
             if (!targetHasMarker)
