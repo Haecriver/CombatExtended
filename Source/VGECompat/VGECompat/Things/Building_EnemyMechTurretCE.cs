@@ -105,6 +105,10 @@ public class Building_EnemyMechTurretCE : Building_GravshipTurretCE
 
     public override LocalTargetInfo TryFindNewTarget()
     {
+        if (GravshipUtility.GetPlayerGravEngine_NewTemp(Map) != null)
+        {
+            return GetTargetForMap(Map);
+        }
         // replace vge artillery comp with our logic
         if (IsMortar && Active && Faction.IsPlayerSafe() && ProjectileProps?.shellingProps != null)
         {
@@ -126,7 +130,13 @@ public class Building_EnemyMechTurretCE : Building_GravshipTurretCE
                         }
                     }
                 }
-                mapsWithDist.Sort((a, b) => a.distance.CompareTo(b.distance));
+                mapsWithDist.Sort((a, b) =>
+                {
+                    int cmp = (GravshipUtility.GetPlayerGravEngine_NewTemp(b.map) != null ? 1 : 0)
+                            - (GravshipUtility.GetPlayerGravEngine_NewTemp(a.map) != null ? 1 : 0);
+                    if (cmp != 0) { return cmp; }
+                    return a.distance.CompareTo(b.distance);
+                });
                 cachedMapsInRange = mapsWithDist.Select(x => x.map).ToList();
             }
 
