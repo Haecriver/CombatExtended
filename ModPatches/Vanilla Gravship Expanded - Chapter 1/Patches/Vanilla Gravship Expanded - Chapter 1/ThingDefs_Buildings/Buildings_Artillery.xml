@@ -255,7 +255,13 @@
 	<!-- === PointDefenseTurret === -->
 
 	<!-- Using this PR as an example : https://github.com/CombatExtended-Continued/CombatExtended/pull/4470/changes#diff-4de1f8cdac8b3e1b87581e507669ae12582bb153ea24a5923b405f9959c7a1be -->
-	<!-- The only difference is the range of fire : VFES=19.9 and VGE=14.9 so I subtracted ~25% of the patch range -->
+	<!-- The only differences are -->
+	<!--  - the range of fire : VFES=19.9 and VGE=14.9 so I subtracted ~25% of the patch range -->
+	<!--  - the shots/s : VFES=12 and VGE=4 -->
+	<!--  - interception chance for projectile : VFES=13% and VGE=70% -->
+	<!--  - interception chance for cargo pods : VFES=10% and VGE=25% -->
+	<!-- To reproduce these enhancements in precision, I boosted the accuracy of the turret,
+		 and add a very fast projectile to intercept incoming shell -->
 	<!-- (Thanks to turkler and DarkByteZero) -->
 
 	<!-- Remove refuelable property -->
@@ -284,14 +290,14 @@
 	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/ThingDef[defName="VGE_PointDefenseTurret"]/statBases </xpath>
 		<value>
-			<AimingAccuracy>0.96</AimingAccuracy>
+			<AimingAccuracy>2.5</AimingAccuracy>
 		</value>
 	</Operation>
 
 	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/ThingDef[defName="VGE_PointDefenseTurret"]/statBases </xpath>
 		<value>
-			<NightVisionEfficiency>0.8</NightVisionEfficiency>
+			<NightVisionEfficiency>1</NightVisionEfficiency>
 		</value>
 	</Operation>
 
@@ -310,7 +316,7 @@
 	<Operation Class="PatchOperationReplace">
 		<xpath>Defs/ThingDef[defName="VGE_PointDefenseTurret"]/statBases/ShootingAccuracyTurret </xpath>
 		<value>
-			<ShootingAccuracyTurret>1.25</ShootingAccuracyTurret>
+			<ShootingAccuracyTurret>5</ShootingAccuracyTurret>
 		</value>
 	</Operation>
 
@@ -355,12 +361,12 @@
 		<statBases>
 			<SightsEfficiency>1</SightsEfficiency>
 			<ShotSpread>0.01</ShotSpread>
-			<SwayFactor>0.12</SwayFactor>
+			<SwayFactor>0.04</SwayFactor>
 			<Mass>150.0</Mass>
 			<RangedWeapon_Cooldown>0.1</RangedWeapon_Cooldown>
 		</statBases>
 		<AmmoUser>
-			<magazineSize>240</magazineSize>
+			<magazineSize>80</magazineSize>
 			<reloadTime>9.2</reloadTime>
 			<ammoSet>AmmoSet_145x114mm</ammoSet>
 		</AmmoUser>
@@ -384,11 +390,11 @@
 				<verbClass>CombatExtended.VerbCIWSProjectile</verbClass>
 				<recoilAmount>0.24</recoilAmount>
 				<hasStandardCommand>true</hasStandardCommand>
-				<defaultProjectile>Bullet_145x114mm_FMJ</defaultProjectile>
+				<defaultProjectile>VGE_Bullet_145x114mm_FMJ_Fast</defaultProjectile>
 				<warmupTime>0.1</warmupTime>
 				<range>64</range>
 				<ticksBetweenBurstShots>1</ticksBetweenBurstShots>
-				<burstShotCount>12</burstShotCount>
+				<burstShotCount>4</burstShotCount>
 				<soundCast>GunShotA</soundCast>
 				<soundCastTail>GunTail_Heavy</soundCastTail>
 				<muzzleFlashScale>15</muzzleFlashScale>
@@ -404,7 +410,7 @@
 				<warmupTime>0.1</warmupTime>
 				<range>64</range>
 				<ticksBetweenBurstShots>1</ticksBetweenBurstShots>
-				<burstShotCount>12</burstShotCount>
+				<burstShotCount>4</burstShotCount>
 				<soundCast>GunShotA</soundCast>
 				<soundCastTail>GunTail_Heavy</soundCastTail>
 				<muzzleFlashScale>15</muzzleFlashScale>

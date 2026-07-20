@@ -403,4 +403,17 @@
 		</comps>
 	</ThingDef>
 
+	<!-- === PointDefenseTurret === -->
+
+	<ThingDef ParentName="Base145x114mmBullet">
+		<defName>VGE_Bullet_145x114mm_FMJ_Fast</defName>
+		<label>14.5x114mm bullet (FMJ)</label>
+		<projectile Class="CombatExtended.ProjectilePropertiesCE">
+			<damageAmountBase>53</damageAmountBase>
+			<armorPenetrationSharp>18</armorPenetrationSharp>
+			<armorPenetrationBlunt>634</armorPenetrationBlunt>
+			<speed>278</speed>
+		</projectile>
+	</ThingDef>
+
 </Defs>
