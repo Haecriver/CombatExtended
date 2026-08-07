@@ -39,6 +39,20 @@ public class Building_GravshipTurretCE : Building_TurretGunCE
             SetFaction(null);
         }
     }
+
+    public virtual void AbortFiringState()
+    {
+        // We don't have burstActivated in Building_TurretGunCE, but it should not change anything
+        // burstActivated = false;
+        if (AttackVerb != null)
+        {
+            AttackVerb.state = VerbState.Idle;
+            AttackVerb.burstShotsLeft = 0;
+            AttackVerb.ticksToNextBurstShot = 0;
+        }
+        ResetForcedTarget();
+    }
+
     public virtual bool CanFire => !permanentlyDisabled && (linkedTerminal?.MannedByPlayer ?? false);
 
     public virtual bool CanAutoAttack => false;
