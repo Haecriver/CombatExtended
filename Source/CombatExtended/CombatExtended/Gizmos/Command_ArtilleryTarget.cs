@@ -45,11 +45,6 @@ public class Command_ArtilleryTarget : Command
         others.Add(order);
     }
 
-    protected void CommandProcessInput(Event ev)
-    {
-        base.ProcessInput(ev);
-    }
-
     public override void ProcessInput(Event ev)
     {
         CameraJumper.TryJump(CameraJumper.GetWorldTarget(turret));
@@ -178,7 +173,7 @@ public class Command_ArtilleryTarget : Command
                 }
                 return true;
             });
-        CommandProcessInput(ev);
+        base.ProcessInput(ev);
     }
 
     /// <summary>
