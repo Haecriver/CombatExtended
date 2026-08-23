@@ -145,10 +145,9 @@ public class Building_EnemyMechTurretCE : Building_GravshipTurretCE
                 var target = GetTargetForMap(map);
                 if (target.IsValid)
                 {
-                    if (target.Thing.Map != Map && Active)
+                    if (map != Map && Active)
                     {
-                        TryAttackWorldTarget(new GlobalTargetInfo(target.Thing), target);
-                        return LocalTargetInfo.Invalid; // TODO: To be tested, I'm not sure for this return value
+                        return LocalTargetInfo.Invalid;
                     }
                     return target;
                 }
@@ -229,6 +228,10 @@ public class Building_EnemyMechTurretCE : Building_GravshipTurretCE
         }
         foreach (var building in map.listerBuildings.allBuildingsColonist)
         {
+            if (building == searcherThing || !searcherThing.HostileTo(building))
+            {
+                continue;
+            }
             if (!seenTargets.ContainsKey(building))
             {
                 int priority = GetTargetPriority(building);
@@ -250,7 +253,8 @@ public class Building_EnemyMechTurretCE : Building_GravshipTurretCE
             }
             else
             {
-                return target;
+                TryAttackWorldTarget(new GlobalTargetInfo(target), new LocalTargetInfo(target));
+                return this.forcedTarget;
             }
         }
         return LocalTargetInfo.Invalid;
