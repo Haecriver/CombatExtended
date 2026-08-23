@@ -1,0 +1,30 @@
+﻿using HarmonyLib;
+using UnityEngine;
+using VanillaGravshipExpanded;
+using Verse;
+
+namespace CombatExtended.Compatibility.VGECompat;
+
+[HarmonyPatch(typeof(DynamicDrawManager), nameof(DynamicDrawManager.DrawDynamicThings))]
+public static class DynamicDrawManager_DrawDynamicThings_Patch
+{
+    public static bool IsPointDefenseTurret(ThingDef def)
+    {
+        return def == VGEDefOf.VGE_PointDefenseTurret || def.defName == "VGE_EnemyPointDefenseTurret";
+    }
+
+    public static void Postfix(DynamicDrawManager __instance)
+    {
+        foreach (var thing in __instance.DrawThings)
+        {
+            if (thing is Building_TurretGunCE gun && (gun is Building_GravshipTurretCE || IsPointDefenseTurret(gun.def)))
+            {
+                if (gun.Map.fogGrid.IsFogged(gun.Position))
+                {
+                    gun.top.DrawTurret(gun.DrawPos, Vector3.zero, 0f);
+                }
+            }
+        }
+    }
+}
+

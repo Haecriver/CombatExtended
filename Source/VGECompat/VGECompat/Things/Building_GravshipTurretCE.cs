@@ -329,19 +329,6 @@ public class Building_GravshipTurretCE : Building_TurretGunCE
             return base.Active;
         }
     }
-
-    // HarmonyPatches/Building_TurretGun_IsMortarOrProjectileFliesOverhead_Patch
-    // No need to override IsMortarOrProjectileFliesOverhead, our code works
-
-    // HarmonyPatches/Building_TurretGun_OrderAttack_Patch
-    // No need to override OrderAttack, we don't use VGE CompWorldArtillery
-
-    // HarmonyPatches/Building_TurretGun_ResetForcedTarget_Patch
-    // No need to override ResetForcedTarget, we don't use VGE CompWorldArtillery
-
-    // HarmonyPatches/Building_TurretGun_TryStartShootSomething_Patch
-    // No need to override TryStartShootSomething, as we don't use their code for turret rotation
-
     #endregion
 }
 
