@@ -2,9 +2,7 @@
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
-using VEF;
 using Verse;
-using Verse.Sound;
 
 namespace CombatExtended;
 public class Verb_ShootMortarCE : Verb_ShootCE
